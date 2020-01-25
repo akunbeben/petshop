@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Starter Page</h1>
+                <h1 class="m-0 text-dark">Data Produk</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="#">Master Data</a></li>
+                <li class="breadcrumb-item active">Produk</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -52,7 +52,15 @@
                                     <td><?= rupiah($prd->harga_jual); ?></td>
                                     <td><?= $prd->stok; ?></td>
                                     <td class="text-center" style="max-width: 50px;">
-                                        <button style="max-width: 45px;" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button 
+                                        style="max-width: 45px;" 
+                                        class="btn btn-success btn-sm"
+                                        data-toggle="modal" 
+                                        data-target="#detailprodukModal"
+                                        >
+                                        <i class="fas fa-eye"></i>
+                                        </button>
+                                        
                                         <button 
                                             id="edit-produk"
                                             style="max-width: 45px;" 
@@ -91,7 +99,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-stok" id="form-stok" method="post" action="<?= base_url('produk/stockin/'); ?>">
+                <form class="form-stok" id="form-stok" method="post" action="<?= base_url('master-data/stockin/'); ?>">
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label" for="produk_stok">Produk</label>
                       <div class="col-sm-9">
@@ -173,12 +181,6 @@
                             <input type="number" class="form-control" id="harga_jual" placeholder="Harga Jual" name="harga_jual" required>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="jumlah" placeholder="Jumlah" name="jumlah" required>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('form-produk').reset();" data-dismiss="modal">Tutup</button>
@@ -201,7 +203,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-editproduk" id="form-editproduk" method="post" action="<?= base_url('produk/edit/'); ?>">
+                <form class="form-editproduk" id="form-editproduk" method="post" action="<?= base_url('master-data/edit/'); ?>">
                     <div class="form-group row">
                         <label for="editproduk" class="col-sm-3 col-form-label">Produk</label>
                         <div class="col-sm-9">
@@ -231,12 +233,59 @@
                         </select>
                       </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="harga" class="col-sm-3 col-form-label">Harga</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="harga" placeholder="Harga Produk" name="harga" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('form-editproduk').reset();" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="detailprodukModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="detailprodukLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailprodukLabel">Detail stok</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <table id="detailTable" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nama Produk</th>
+                                <th>Data Masuk</th>
+                                <th>Jumlah</th>
+                                <th>Di input oleh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php 
+                        $detail = $this->ProdukModel->detail()->result();
+                        foreach ($detail as $dtl) : ?>
+                            <tr>
+                                <td><?= $dtl->nama_produk; ?></td>
+                                <td><?= $dtl->time_stamp; ?></td>
+                                <td><?= $dtl->jumlah == 0 ? 'Stok inisial' : $dtl->jumlah; ?></td>
+                                <td><?= $dtl->created_by; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

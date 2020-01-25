@@ -37,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -47,86 +47,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
-
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="<?= base_url('backend/assets/'); ?>dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="<?= base_url('backend/assets/'); ?>dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="<?= base_url('backend/assets/'); ?>dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -164,10 +88,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?= base_url(); ?>" class="brand-link">
-      <img src="<?= base_url('backend/assets/'); ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <a href="<?= base_url(); ?>" class="brand-link text-center">
+      <span class="brand-text font-weight-light">PETSHOP</span>
     </a>
 
     <!-- Sidebar -->
@@ -187,8 +109,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'produk' ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'produk' ? 'active' : '' ?>">
+          <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'master-data' ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'master-data' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Master Data
@@ -197,28 +119,91 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('produk/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'produk' ? 'active' : '' ?>">
+                <a href="<?= base_url('master-data/produk/'); ?>" class="nav-link <?= $this->uri->segment(2) == 'produk' ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Produk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('inventory/'); ?>" class="nav-link">
+                <a href="<?= base_url('master-data/kategori-produk/'); ?>" class="nav-link <?= $this->uri->segment(2) == 'kategori-produk' ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <p>Kategori Produk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('master-data/unit-produk/'); ?>" class="nav-link <?= $this->uri->segment(2) == 'unit-produk' ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Unit Produk</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('pelanggan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'pelanggan' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
+                Pelanggan
               </p>
             </a>
           </li>
+          <li class="nav-header">MAIN MENU</li>
+          <li class="nav-item">
+            <a href="<?= base_url('penjualan/'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Penjualan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('penitipan/'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-cat"></i>
+              <p>
+                Penitipan
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">REPORTS</li>
+          <li class="nav-item">
+            <a href="<?= base_url('laporan/inventori'); ?>" class="nav-link <?= $this->uri->segment(2) == 'inventori' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan Inventori
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('laporan/stok-masuk'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-barcode"></i>
+              <p>
+                Laporan Barang Masuk
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('laporan/penjualan'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Laporan Penjualan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('laporan/penitipan'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-cat"></i>
+              <p>
+                Laporan Penitipan
+              </p>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="<?= base_url('laporan/inventori'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan Inventori
+              </p>
+            </a>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -278,6 +263,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?= base_url('backend/assets/'); ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <!-- Toastr -->
 <script src="<?= base_url('backend/assets/'); ?>plugins/toastr/toastr.min.js"></script>
+<script src="<?= base_url('backend/assets/'); ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('backend/assets/'); ?>dist/js/adminlte.min.js"></script>
 
