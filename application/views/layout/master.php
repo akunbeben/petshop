@@ -181,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('laporan/penjualan'); ?>" class="nav-link">
+            <a href="<?= base_url('laporan/penjualan'); ?>" class="nav-link <?= $this->uri->segment(2) == 'penjualan' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Laporan Penjualan

@@ -2,12 +2,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<link rel="STYLESHEET" href="nota.css" type="text/css" />
+<link rel="STYLESHEET" href="<?= base_url('backend/assets/'); ?>nota.css" type="text/css" />
 </head>
 
 <body>
 
-<div id="body" style="width: 10cm;">
+<div id="body" style="width: 57mm;">
   <div id="print-area">
 
     <div id="section_header">
@@ -24,13 +24,12 @@
     
     <table style="width: 100%; font-size: 12pt;">
     <tr>
-    <td>No. Struk: P2601200001</td>
-    <td style="text-align: right;">Kasir: Admin</td>
+    <td>No. Struk: <?= $header->faktur; ?></td>
+    <td style="text-align: right;">Kasir: <?= $header->kasir; ?></td>
     </tr>
     
     <tr>
-    <td>Tgl. Transaksi: 24 Jan 2020</td>
-    <td  style="text-align: right;">Dicetak pada: 24 Jan 2020  9:28 AM</td>
+    <td>Tgl. Transaksi: <?= date('d M Y' , strtotime($header->waktu_transaksi)); ?></td>
     </tr>
     
     <tr>
@@ -48,25 +47,28 @@
     <th style="border-bottom: 1px dotted;">No</th>
     <th style="border-bottom: 1px dotted;">Produk</th style="border-bottom: 1px dotted;">
     <th style="border-bottom: 1px dotted;">Jumlah</th style="border-bottom: 1px dotted;">
-    <th style="border-bottom: 1px dotted;" colspan="2">Harga</th style="border-bottom: 1px dotted;">
-    <th style="border-bottom: 1px dotted;">Total</th style="border-bottom: 1px dotted;">
+    <th style="border-bottom: 1px dotted;">Harga</th style="border-bottom: 1px dotted;">
+    <!-- <th style="border-bottom: 1px dotted;">Total</th style="border-bottom: 1px dotted;"> -->
     </tr>
     
+    <?php $no = 1;
+    foreach ($body as $key) : ?>
     <tr class="even_row">
-    <td style="text-align: center; ">1</td>
-    <td style="">Sprockets (13 tooth)</td>
-    <td style="text-align: center; ">50</td>
-    <td style="text-align: right; ">$10.00</td>
-    <td style="text-align: right; " class="change_order_unit_col" style="border-left-style: none;">Ea.</td>
-    <td style="text-align: right; " class="change_order_total_col">$5,000.00</td>
+    <td style="text-align: center; "><?= $no++; ?></td>
+    <td style=""><?= $key->nama_produk; ?></td>
+    <td style="text-align: center; "><?= $key->jumlah_terjual; ?></td>
+    <td style="text-align: right; "><?= rupiah($key->harga_jual); ?></td>
+    <!-- <td style="text-align: right; "><?= rupiah($key->harga_jual * $key->jumlah_terjual); ?></td> -->
     </tr>
+    <?php endforeach; ?>
     
     </tbody>
     
     </table>
     
-    <p style="text-align: right; font-size: 15px;">Total</p>
-    <p style="text-align: right; font-size: 15px;">Rp. 50.000</p>
+    <p style="text-align: right; font-size: 20px;">Total: <?= rupiah($header->total); ?></p>
+    <p style="text-align: right; font-size: 20px; margin-top: -15px; border-bottom: 1px dotted;">Bayar: <?= rupiah($header->bayar); ?></p>
+    <p style="text-align: right; font-size: 20px;">Kembali: <?= rupiah($header->kembalian); ?></p>
     <br>
     <br>
     
@@ -79,7 +81,7 @@
     
     <div style="text-align: right;">
       <button onclick="window.print()">Print</button>
-      <button onclick="window.location.href=''">Kembali</button>
+      <button onclick="window.location.href='<?= base_url('penjualan/'); ?>'">Kembali</button>
     </div>
 
 </div>

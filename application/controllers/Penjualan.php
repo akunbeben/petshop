@@ -94,4 +94,49 @@ class Penjualan extends CI_Controller {
             redirect('penjualan/');
         }
     }
+
+    public function proses()
+    {
+        if ($this->input->post('pelanggan') == null) {
+            $pelanggan = 'Umum';
+        } else {
+            $pelanggan = $this->input->post('pelanggan');
+        }
+        $data = [
+            'faktur'            => noFaktur(fakturAutoID()),
+            'kasir'             => $this->session->userdata('username'),
+            'pelanggan'         => $pelanggan,
+            'total'             => $this->PenjualanModel->grandTotal(),
+            'profit'            => $this->PenjualanModel->profit(),
+            'bayar'             => $this->input->post('bayar'),
+            'kembalian'         => $this->input->post('bayar') - $this->PenjualanModel->grandTotal(),
+            'waktu_transaksi'   => date('Y-m-d H:i:s', time())
+        ];
+
+        if ($this->PenjualanModel->carts()->num_rows() <= 0) {
+            $this->session->set_flashdata('gagal-produk', 'Keranjang belanja masih kosong.');
+            redirect('penjualan/');
+        } else {
+            $this->PenjualanModel->proses($data);
+            $this->PenjualanModel->addDetail($this->PenjualanModel->last_row()->faktur);
+            $this->PenjualanModel->clear();
+            $cashback       = $this->PenjualanModel->last_row()->cashback;
+            if ($cashback == 0) {
+                $this->session->set_flashdata('sukses-produk', 'Transaksi sukses.');
+            } else {
+                $this->session->set_flashdata('sukses-produk', 'Transaksi sukses. Kembalian anda ' . rupiah($cashback));
+            }
+            redirect('penjualan/print/');
+        }
+    }
+
+    public function print()
+    {
+        $faktur = $this->PenjualanModel->nota_header()->row()->faktur;
+        $data = [
+            'header'    => $this->PenjualanModel->nota_header()->row(),
+            'body'      => $this->PenjualanModel->nota_line($faktur)->result()
+        ];
+        $this->load->view('penjualan/nota', $data);
+    }
 }

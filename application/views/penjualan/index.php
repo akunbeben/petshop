@@ -27,7 +27,7 @@
                             <div class="form-group row">
                                 <label for="customer" class="col-sm-2 col-form-label">Produk</label>
                                 <div class="col-md-9">
-                                    <select name="produk" id="produk" class="form-control select-produk">
+                                    <select name="produk" id="produk" class="form-control select-produk" required>
                                         <option value="">-- Pilih Produk --</option>
                                         <?php foreach ($produk as $prd) : ?>
                                         <option value="<?= $prd->id; ?>"><?= $prd->nama_produk; ?></option>
@@ -77,16 +77,16 @@
                 </div>
             </div>
         </div>
-        <form method="post" action="<?= base_url('pos/process'); ?>">
+        <form method="post" action="<?= base_url('penjualan/proses'); ?>">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card">
                         <!-- form start -->
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="cash" class="col-sm-4 col-form-label">Cash</label>
+                                <label for="bayar" class="col-sm-4 col-form-label">Bayar</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="cash" name="cash" required>
+                                    <input type="number" class="form-control" id="bayar" name="bayar" required>
                                     <input type="hidden" class="form-control" id="customer" name="customer">
                                 </div>
                             </div>
@@ -102,11 +102,8 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="row justify-content-end my-2">
-                        <button class="btn-lg btn-warning clear-cart col-md-12" onclick="window.location.href='<?= base_url('penjualan/reset'); ?>'"><i class="fa fa-refresh"></i> New Order</button>
-                    </div>
-                    <div class="row justify-content-end my-2">
+                <div class="col-md-3">
+                    <div class="row justify-content-end">
                         <button class="btn-lg btn-success col-md-12" type="submit"><i class="fa fa-send"></i> Process Order</button>
                     </div>
                 </div>
@@ -117,4 +114,8 @@
 
 <?php if ($this->session->flashdata('gagal-produk')) : ?>
     <div class="gagal-produk" data-gagalproduk="<?= $this->session->flashdata('gagal-produk'); ?>"></div>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('sukses-produk')) : ?>
+    <div class="sukses-produk" data-suksesproduk="<?= $this->session->flashdata('sukses-produk'); ?>"></div>
 <?php endif; ?>

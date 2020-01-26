@@ -13,6 +13,16 @@ class LaporanModel Extends CI_Model
         return $this->db->get('laporan');
     }
 
+    public function get_penjualan($param = null)
+    {
+        $this->db->where('doc_type', 3);
+        if ($param !== null) {
+            $this->db->where('id', $param);
+        }
+        $this->db->order_by('id DESC');
+        return $this->db->get('laporan');
+    }
+
     public function get_stok($param = null)
     {
         $this->db->where('doc_type', 2);
@@ -27,6 +37,12 @@ class LaporanModel Extends CI_Model
     {
         $this->db->where('doc_id', $param);
         return $this->db->get('laporan_inventory_detail');
+    }
+
+    public function detail_penjualan($param)
+    {
+        $this->db->where('doc_id', $param);
+        return $this->db->get('laporan_penjualan_detail');
     }
 
     public function detail_stok($param)
@@ -54,7 +70,17 @@ class LaporanModel Extends CI_Model
         $this->db->insert_batch('laporan_stok_detail', $data);
     }
 
+    public function generate_penjualan($data)
+    {
+        $this->db->insert_batch('laporan_penjualan_detail', $data);
+    }
+
     public function generateInv($param)
+    {
+        $this->db->insert('laporan', $param);
+    }
+
+    public function generatePenjualan($param)
     {
         $this->db->insert('laporan', $param);
     }
@@ -75,6 +101,14 @@ class LaporanModel Extends CI_Model
     public function filter_stok($param)
     {
         $this->db->where('doc_type', 2);
+        $this->db->where('created_at >=', $param['tgl_awal']);
+        $this->db->where('created_at <=', $param['tgl_akhir']);
+        return $this->db->get('laporan');
+    }
+
+    public function filter_penjualan($param)
+    {
+        $this->db->where('doc_type', 3);
         $this->db->where('created_at >=', $param['tgl_awal']);
         $this->db->where('created_at <=', $param['tgl_akhir']);
         return $this->db->get('laporan');

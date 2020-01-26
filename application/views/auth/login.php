@@ -1,83 +1,105 @@
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Petshop - <?= $title; ?></title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/vendors/iconfonts/ionicons/css/ionicons.css">
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/vendors/iconfonts/typicons/src/font/typicons.css">
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/vendors/css/vendor.bundle.addons.css">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="<?= base_url('backend/assets'); ?>/css/shared/style.css">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="<?= base_url('backend/assets'); ?>/images/favicon.png" />
-  </head>
-  <body>
-    <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
-          <div class="row w-100">
-            <div class="col-lg-4 mx-auto">
-              <div class="auto-form-wrapper">
-                <?= $this->session->flashdata('message'); ?>
-                <form action="" method="post">
-                  <div class="form-group">
-                    <label class="label">Username</label>
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Username" name="username">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="label">Password</label>
-                    <div class="input-group">
-                      <input type="password" class="form-control" placeholder="*********" name="password">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Login" class="btn btn-primary submit-btn btn-block">
-                  </div>
-                  <div class="form-group d-flex justify-content-between">
-                  </div>
-                </form>
-              </div>
-              <ul class="auth-footer">
-                
-              </ul>
-              <p class="footer-text text-center">copyright © 2018 Bootstrapdash. All rights reserved.</p>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PETSHOP | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/fontawesome-free/css/all.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/jqvmap/jqvmap.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Theme style -->
+  <!-- Toastr -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/toastr/toastr.min.css">
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="">PETSHOP</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form action="" method="post">
+        <div class="input-group mb-3">
+          <input type="text" name="username" class="form-control" placeholder="Username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
-        <!-- content-wrapper ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+            <?php if ($this->session->flashdata('gagal-produk')) : ?>
+              <div class="gagal-produk" data-gagalproduk="<?= $this->session->flashdata('gagal-produk'); ?>"></div>
+            <?php endif; ?>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="<?= base_url('backend/assets'); ?>/vendors/js/vendor.bundle.base.js"></script>
-    <script src="<?= base_url('backend/assets'); ?>/vendors/js/vendor.bundle.addons.js"></script>
-    <!-- endinject -->
-    <!-- inject:js -->
-    <script src="<?= base_url('backend/assets'); ?>/js/shared/off-canvas.js"></script>
-    <script src="<?= base_url('backend/assets'); ?>/js/shared/misc.js"></script>
-    <!-- endinject -->
-  </body>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+
+
+<!-- jQuery -->
+<script src="<?= base_url('backend/assets/'); ?>plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?= base_url('backend/assets/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="<?= base_url('backend/assets/'); ?>plugins/select2/js/select2.full.min.js"></script>
+<!-- DataTables -->
+<script src="<?= base_url('backend/assets/'); ?>plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?= base_url('backend/assets/'); ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- Toastr -->
+<script src="<?= base_url('backend/assets/'); ?>plugins/toastr/toastr.min.js"></script>
+<script src="<?= base_url('backend/assets/'); ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?= base_url('backend/assets/'); ?>dist/js/adminlte.min.js"></script>
+
+<script src="<?= base_url('backend/assets/'); ?>master.js"></script>
+
+</body>
 </html>

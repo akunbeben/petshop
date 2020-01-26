@@ -5,7 +5,7 @@ class PenjualanModel extends CI_Model{
 
     public function get()
     {
-
+        return $this->db->get('penjualan');
     }
 
     public function carts($id = null)
@@ -78,4 +78,53 @@ class PenjualanModel extends CI_Model{
         $this->db->where('keranjang_id', $param['keranjang_id']);
         $this->db->update('keranjang_detail');
     }
+
+    public function profit()
+    {
+        $query = 'SELECT sum(profit) AS profit FROM keranjang_detail';
+        return $this->db->query($query)->row()->profit;
+    }
+
+    public function clear()
+    {
+        $this->db->empty_table('keranjang');
+    }
+
+    public function proses($param)
+    {
+        $this->db->insert('penjualan', $param);
+    }
+
+    public function last_row()
+    {
+        return $this->db->from('penjualan')->order_by('faktur DESC')->limit(1)->get()->row();
+    }
+
+    public function addDetail($no_invoice)
+    {
+        $this->db->query("INSERT INTO penjualan_detail (id, faktur_id, produk, jumlah_terjual)
+                    SELECT null, '$no_invoice', keranjang.produk_id, keranjang.qty
+                    FROM keranjang");
+    }
+
+    public function nota_header()
+    {
+        $this->db->order_by('faktur DESC');
+        $this->db->limit(1);
+        return $this->db->get('penjualan');
+    }
+
+    public function nota_line($faktur)
+    {
+        $this->db->select('penjualan_detail.*, produk.nama_produk, produk.harga_jual');
+        $this->db->join('produk', 'penjualan_detail.produk = produk.id');
+        $this->db->where('faktur_id', $faktur);
+        $this->db->from('penjualan_detail');
+        return $this->db->get();
+    }
+
+    // public function detail()
+    // {
+
+    // }
 }
