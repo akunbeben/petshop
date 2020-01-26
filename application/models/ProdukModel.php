@@ -127,4 +127,25 @@ class ProdukModel extends CI_Model
     {
         $this->db->delete($param['tableName'], ['id' => $param['id']]);
     }
+
+    public function kurang($id)
+    {
+        $this->db->set('stok', 'stok - 1', FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('produk');
+    }
+
+    public function tambah($id)
+    {
+        $this->db->set('stok', 'stok + 1', FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('produk');
+    }
+
+    public function returnStok($id = null, $qty = null)
+    {
+        $this->db->set('stok', 'stok + ' . $qty, FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('produk');
+    }
 }

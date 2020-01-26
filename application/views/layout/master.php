@@ -37,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'penjualan' ? 'sidebar-collapse' : '' ; ?>">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -148,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
-            <a href="<?= base_url('penjualan/'); ?>" class="nav-link">
+            <a href="<?= base_url('penjualan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'penjualan' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Penjualan
@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('laporan/stok-masuk'); ?>" class="nav-link">
+            <a href="<?= base_url('laporan/stok-masuk'); ?>" class="nav-link <?= $this->uri->segment(2) == 'stok-masuk' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-barcode"></i>
               <p>
                 Laporan Barang Masuk
@@ -242,7 +242,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.

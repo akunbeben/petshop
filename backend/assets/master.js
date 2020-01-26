@@ -5,7 +5,7 @@ $(document).ready(function(){
     });
 });
 
-$('.select-produk, .select-kategori, .select-unit').select2({
+$('.select-produk, .select-kategori, .select-unit, .customer').select2({
   theme: 'bootstrap4'
 });
 
@@ -18,6 +18,7 @@ $(function () {
     "info": false,
     "autoWidth": false,
     "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "Semua"]],
+    "order": [[ 0, "desc" ]],
     "language": {
       "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
     }
@@ -33,6 +34,7 @@ $(function () {
     "info": false,
     "autoWidth": false,
     "lengthMenu": [[5, 10], [5, 10]],
+    "order": [[ 0, "desc" ]],
     "language": {
       "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
     }
@@ -133,3 +135,8 @@ if (flashData) {
     toastr.success(flashData);
 };
 
+const flashDataGagal = $('.gagal-produk').data('gagalproduk');
+
+if (flashDataGagal) {
+    toastr.error(flashDataGagal);
+};

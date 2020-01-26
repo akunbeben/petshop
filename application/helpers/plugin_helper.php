@@ -5,21 +5,21 @@ function rupiah($number){
 	return $output;
 }
 
-function FormatNoTrans($num)
+function FormatNoTrans($num, $tipe)
 {
     $num = $num + 1;
     switch (strlen($num)) {
         case 1:
-            $NoTrans = "KP0000" . $num;
+            $NoTrans = "DOC/0000" . $num . $tipe . date('/d/m/Y');
             break;
         case 2:
-            $NoTrans = "KP000" . $num;
+            $NoTrans = "DOC/000" . $num . $tipe . date('/d/m/Y');
             break;
         case 3:
-            $NoTrans = "KP00" . $num;
+            $NoTrans = "DOC/00" . $num . $tipe . date('/d/m/Y');
             break;
         case 4:
-            $NoTrans = "KP0" . $num;
+            $NoTrans = "DOC/0" . $num . $tipe . date('/d/m/Y');
             break;
         default:
             $NoTrans = $num;
@@ -27,10 +27,26 @@ function FormatNoTrans($num)
     return $NoTrans;
 }
 
-function OtomatisID()
+function invAutoID()
 {
     $ci = &get_instance();
-    $ci->db->from('sales');
+    $ci->db->from('laporan');
+    $ci->db->where('doc_type', 1);
     $result = $ci->db->get()->num_rows();
     return $result;
+}
+
+function stokAutoID()
+{
+    $ci = &get_instance();
+    $ci->db->from('laporan');
+    $ci->db->where('doc_type', 2);
+    $result = $ci->db->get()->num_rows();
+    return $result;
+}
+
+function dd($val)
+{
+    return var_dump($val);
+    die;
 }

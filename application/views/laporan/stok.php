@@ -65,7 +65,7 @@
                             <h1 class="card-title">Data <?= $title; ?></h1>
                         </div>
                         <div class="float-right">
-                            <form action="<?= base_url('laporan/generate_inv'); ?>" method="post">
+                            <form action="<?= base_url('laporan/generate_stok'); ?>" method="post">
                                 <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-paste"></i> Buat Laporan</button>
                             </form>
                         </div>
@@ -81,22 +81,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($inventori as $inv) : ?>
+                            <?php foreach ($stok as $stk) : ?>
                                 <tr>
-                                    <td><?= $inv->no_doc; ?></td>
-                                    <td><?= $inv->created_at; ?></td>
-                                    <td><?= $inv->created_by; ?></td>
+                                    <td><?= $stk->no_doc; ?></td>
+                                    <td><?= $stk->created_at; ?></td>
+                                    <td><?= $stk->created_by; ?></td>
                                     <td>
                                         <div class="row justify-content-center">
-                                            <form action="<?= base_url('laporan/inventori-print/'); ?>" method="post">
-                                                <input type="hidden" value="<?= $inv->id; ?>" name="id">
-                                                <input type="hidden" value="pdf" name="tipe">
+                                            <form action="<?= base_url('laporan/stok-masuk-print/'); ?>" method="post">
+                                                <input type="hidden" value="<?= $stk->id; ?>" name="id">
                                                 <button class="btn btn-success btn-sm" type="submit" value="pdf" name="gen"><i class="fas fa-download"></i></button>
                                             </form>
                                             &nbsp;
-                                            <form action="<?= base_url('laporan/inventori-print/'); ?>" method="post">
-                                                <input type="hidden" value="<?= $inv->id; ?>" name="id">
-                                                <input type="hidden" value="print" name="tipe">
+                                            <form action="<?= base_url('laporan/stok-masuk-print/'); ?>" method="post">
+                                                <input type="hidden" value="<?= $stk->id; ?>" name="id">
                                                 <button class="btn btn-warning btn-sm" type="submit" value="print" name="gen"><i class="fas fa-print"></i></button>
                                             </form>
                                         </div>

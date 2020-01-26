@@ -8,6 +8,7 @@ class Master_Data extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ProdukModel');
+        is_not_login();
     }
 
     public function produk()

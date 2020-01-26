@@ -3,7 +3,7 @@
 <html><head>
 <link rel="STYLESHEET" href="<?= base_url('backend/assets'); ?>/print_static.css" type="text/css" />
 <title><?= $title; ?></title>
-</head><body>
+</head><body onload="<?= $this->input->post('tipe') == 'print' ? 'window.print();' : ''; ?>">
 
 <div id="body">
 
@@ -44,7 +44,9 @@
 <tr>
 <th style="text-align: center">No</th>
 <th style="text-align: center">Produk</th>
-<th style="text-align: center">Stok</th>
+<th style="text-align: center">Jumlah</th>
+<th style="text-align: center">Diinput pada</th>
+<th style="text-align: center">Diinput oleh</th>
 </tr>
 
 <?php $no = 1;
@@ -53,6 +55,8 @@ foreach ($body as $bdy) : ?>
 <td style="text-align: center"><?= $no++; ?></td>
 <td><?= $bdy->produk; ?></td>
 <td style="text-align: center"><?= $bdy->jumlah; ?></td>
+<td style="text-align: center"><?= date('d M Y H:i:s', strtotime($bdy->time_stamp)); ?></td>
+<td style="text-align: center"><?= $bdy->created_by; ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
