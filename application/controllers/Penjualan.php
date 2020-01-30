@@ -97,23 +97,23 @@ class Penjualan extends CI_Controller {
 
     public function proses()
     {
-        if ($this->input->post('pelanggan') == null) {
+        if ($this->input->post('customers') == null) {
             $pelanggan = 'Umum';
         } else {
-            $pelanggan = $this->input->post('pelanggan');
+            $pelanggan = $this->input->post('customers');
         }
         $data = [
             'faktur'            => noFaktur(fakturAutoID()),
             'kasir'             => $this->session->userdata('username'),
             'pelanggan'         => $pelanggan,
-            'total'             => $this->PenjualanModel->grandTotal(),
+            'total'             => $this->PenjualanModel->grandTotal()->row()->grand_total,
             'profit'            => $this->PenjualanModel->profit(),
             'bayar'             => $this->input->post('bayar'),
-            'kembalian'         => $this->input->post('bayar') - $this->PenjualanModel->grandTotal(),
+            'kembalian'         => $this->input->post('bayar') - $this->PenjualanModel->grandTotal()->row()->grand_total,
             'waktu_transaksi'   => date('Y-m-d H:i:s', time())
         ];
 
-        if ($this->PenjualanModel->carts()->num_rows() <= 0) {
+        if ($this->PenjualanModel->grandTotal()->num_rows() <= 0) {
             $this->session->set_flashdata('gagal-produk', 'Keranjang belanja masih kosong.');
             redirect('penjualan/');
         } else {

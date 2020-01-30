@@ -21,8 +21,13 @@ class PenjualanModel extends CI_Model{
 
     public function grandTotal()
     {
-        $query = 'SELECT sum(subtotal) AS grand_total FROM keranjang_detail';
-        return $this->db->query($query)->row()->grand_total;
+        $query = "SELECT sum(subtotal) AS grand_total FROM keranjang_detail HAVING (sum(subtotal) > 0)";
+        $execute = $this->db->query($query);
+        if ($execute->num_rows() == 0) {
+            return 0;
+        } else {
+            return $execute;
+        }
     }
 
     public function addtocart($param)
@@ -122,9 +127,4 @@ class PenjualanModel extends CI_Model{
         $this->db->from('penjualan_detail');
         return $this->db->get();
     }
-
-    // public function detail()
-    // {
-
-    // }
 }

@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('penitipan/'); ?>" class="nav-link">
+            <a href="<?= base_url('penitipan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'penitipan' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-cat"></i>
               <p>
                 Penitipan
@@ -189,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('laporan/penitipan'); ?>" class="nav-link">
+            <a href="<?= base_url('laporan/penitipan'); ?>" class="nav-link <?= $this->uri->segment(2) == 'penitipan' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-cat"></i>
               <p>
                 Laporan Penitipan

@@ -5,7 +5,7 @@ $(document).ready(function(){
     });
 });
 
-$('.select-produk, .select-kategori, .select-unit, .customer').select2({
+$('.select-produk, .select-kategori, .select-unit, .customer, #pemilik, #edit_pemilik').select2({
   theme: 'bootstrap4'
 });
 
@@ -41,6 +41,22 @@ $(function () {
   });
 });
 
+$(function () {
+  $('#keluarTable').DataTable({
+    "paging": true,
+    "lengthChange": true,
+    "searching": true,
+    "ordering": true,
+    "info": false,
+    "autoWidth": false,
+    "lengthMenu": [[5, 10], [5, 10]],
+    "order": [[ 0, "desc" ]],
+    "language": {
+      "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
+    }
+  });
+});
+
 $(document).ready( function() {
     $(document).on('click', '#edit-produk', function() {
         var edit_idprod = $(this).data('id');
@@ -54,6 +70,20 @@ $(document).ready( function() {
         $('#editkategori option:selected').val(nama_kategori);
         $('#editunit').val(nama_unit);
         $('#harga').val(harga);
+    })
+});
+
+$(document).ready( function() {
+    $(document).on('click', '#edit-penitipan', function() {
+        var edit_id = $(this).data('id');
+        var edit_nama_peliharaan = $(this).data('nama_peliharaan');
+        var edit_id_pemilik = $(this).data('id_pemilik');
+        var edit_catatan = $(this).data('catatan');
+
+        $('#edit_id').val(edit_id);
+        $('#edit_nama_peliharaan').val(edit_nama_peliharaan);
+        $('#edit_pemilik').val(edit_id_pemilik);
+        $('#edit_catatan').val(edit_catatan);
     })
 });
 
@@ -140,3 +170,16 @@ const flashDataGagal = $('.gagal-produk').data('gagalproduk');
 if (flashDataGagal) {
     toastr.error(flashDataGagal);
 };
+
+// $('#customer').keyup(function() {
+//   update();
+// });
+
+// function update() {
+//   document.getElementById('customers').value($('#customer').val());
+// };
+
+$('#customer').change( function() {
+  $('#customers').val($(this).val())
+});
+

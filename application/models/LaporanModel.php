@@ -12,6 +12,16 @@ class LaporanModel Extends CI_Model
         $this->db->order_by('id DESC');
         return $this->db->get('laporan');
     }
+    
+    public function get_stok($param = null)
+    {
+        $this->db->where('doc_type', 2);
+        if ($param !== null) {
+            $this->db->where('id', $param);
+        }
+        $this->db->order_by('id DESC');
+        return $this->db->get('laporan');
+    }
 
     public function get_penjualan($param = null)
     {
@@ -23,9 +33,10 @@ class LaporanModel Extends CI_Model
         return $this->db->get('laporan');
     }
 
-    public function get_stok($param = null)
+
+    public function get_penitipan($param = null)
     {
-        $this->db->where('doc_type', 2);
+        $this->db->where('doc_type', 4);
         if ($param !== null) {
             $this->db->where('id', $param);
         }
@@ -43,6 +54,12 @@ class LaporanModel Extends CI_Model
     {
         $this->db->where('doc_id', $param);
         return $this->db->get('laporan_penjualan_detail');
+    }
+
+    public function detail_penitipan($param)
+    {
+        $this->db->where('doc_id', $param);
+        return $this->db->get('laporan_penitipan_detail');
     }
 
     public function detail_stok($param)
@@ -75,12 +92,22 @@ class LaporanModel Extends CI_Model
         $this->db->insert_batch('laporan_penjualan_detail', $data);
     }
 
+    public function generate_penitipan($data)
+    {
+        $this->db->insert_batch('laporan_penitipan_detail', $data);
+    }
+
     public function generateInv($param)
     {
         $this->db->insert('laporan', $param);
     }
 
     public function generatePenjualan($param)
+    {
+        $this->db->insert('laporan', $param);
+    }
+
+    public function generatePenitipan($param)
     {
         $this->db->insert('laporan', $param);
     }
@@ -109,6 +136,14 @@ class LaporanModel Extends CI_Model
     public function filter_penjualan($param)
     {
         $this->db->where('doc_type', 3);
+        $this->db->where('created_at >=', $param['tgl_awal']);
+        $this->db->where('created_at <=', $param['tgl_akhir']);
+        return $this->db->get('laporan');
+    }
+
+    public function filter_penitipan($param)
+    {
+        $this->db->where('doc_type', 4);
         $this->db->where('created_at >=', $param['tgl_awal']);
         $this->db->where('created_at <=', $param['tgl_akhir']);
         return $this->db->get('laporan');

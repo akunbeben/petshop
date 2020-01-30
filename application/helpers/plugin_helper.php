@@ -54,6 +54,15 @@ function penjualanAutoID()
     return $result;
 }
 
+function penitipanAutoID()
+{
+    $ci = &get_instance();
+    $ci->db->from('laporan');
+    $ci->db->where('doc_type', 4);
+    $result = $ci->db->get()->num_rows();
+    return $result;
+}
+
 function dd($val)
 {
     return var_dump($val);
