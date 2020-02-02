@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Jan 2020 pada 15.00
+-- Waktu pembuatan: 02 Feb 2020 pada 23.14
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -21,6 +21,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `petshop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(128) NOT NULL,
+  `alamat` text NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `telepon` varchar(128) NOT NULL,
+  `jabatan` int(11) NOT NULL COMMENT '2:kasir, 1:admin',
+  `start_date` datetime NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `karyawan`
+--
+
+INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `email`, `telepon`, `jabatan`, `start_date`, `status`) VALUES
+(1, 'Dwyne Johnson', 'Banjarmasin', 'example@mail.com', '080111111111', 1, '2020-02-03 02:43:57', 0);
 
 -- --------------------------------------------------------
 
@@ -55,6 +79,13 @@ CREATE TABLE `keranjang` (
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `keranjang`
+--
+
+INSERT INTO `keranjang` (`id`, `produk_id`, `qty`) VALUES
+(31, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +98,13 @@ CREATE TABLE `keranjang_detail` (
   `subtotal` int(11) NOT NULL,
   `profit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `keranjang_detail`
+--
+
+INSERT INTO `keranjang_detail` (`id`, `keranjang_id`, `subtotal`, `profit`) VALUES
+(22, 31, 20000, 10000);
 
 -- --------------------------------------------------------
 
@@ -230,17 +268,17 @@ CREATE TABLE `pelanggan` (
   `id` int(11) NOT NULL,
   `nama` varchar(128) NOT NULL,
   `telepon` varchar(20) NOT NULL,
-  `alamat` text NOT NULL
+  `alamat` text NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`id`, `nama`, `telepon`, `alamat`) VALUES
-(1, 'Benny Rahmat', '082253054008', 'Banjarbaru'),
-(2, 'Charina Zahratunnisa', '082253054008', 'Jalan Sukamara No 11 RT 06 RW 02'),
-(3, 'Hehen', '128371923', 'Banjarmasin');
+INSERT INTO `pelanggan` (`id`, `nama`, `telepon`, `alamat`, `status`) VALUES
+(2, 'Charina Zahratunnisa', '082253054008', 'Jalan Sukamara No 11 RT 06 RW 02', 0),
+(3, 'Hehen', '128371923', 'Banjarmasin', 0);
 
 -- --------------------------------------------------------
 
@@ -257,16 +295,6 @@ CREATE TABLE `penitipan` (
   `status` int(11) NOT NULL,
   `tanggal_keluar` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `penitipan`
---
-
-INSERT INTO `penitipan` (`id`, `nama_peliharaan`, `pemilik`, `catatan`, `tanggal_masuk`, `status`, `tanggal_keluar`) VALUES
-(1, 'Anggora', 1, 'Terserang virus corona', '2020-01-31 02:25:21', 1, '2020-01-31 04:21:35'),
-(2, 'Anggora', 1, 'Sedang sakit', '2020-01-31 03:45:18', 1, '2020-01-31 04:30:55'),
-(3, 'Pet', 1, 'Sehat', '2020-01-31 04:51:45', 0, NULL),
-(4, 'Kucing', 1, 'Sehat', '2020-01-31 21:38:08', 1, '2020-01-31 21:38:35');
 
 -- --------------------------------------------------------
 
@@ -344,7 +372,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama_produk`, `stok`, `gambar`, `kategori`, `unit`, `harga_beli`, `harga_jual`, `profit`) VALUES
-(3, 'Wiskas', 15, 'default.png', 1, 2, 10000, 20000, 10000),
+(3, 'Wiskas', 14, 'default.png', 1, 2, 10000, 20000, 10000),
 (4, 'Kandang', 0, 'default.png', 2, 1, 10000, 20000, 10000);
 
 -- --------------------------------------------------------
@@ -402,21 +430,28 @@ INSERT INTO `unit` (`id`, `nama_unit`, `aktif`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
   `username` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `date_created` int(11) NOT NULL
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `date_created`) VALUES
-(1, 'admin', '$2y$10$m2J9wPk4gtbJn3qEQbc.yeSIZBVcG0kPQCU8TnF4IhTfGdVYFFRKq', 1563185660);
+INSERT INTO `users` (`id`, `id_karyawan`, `username`, `password`, `status`) VALUES
+(1, 1, 'admin', '$2y$10$m2J9wPk4gtbJn3qEQbc.yeSIZBVcG0kPQCU8TnF4IhTfGdVYFFRKq', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `kategori`
@@ -524,11 +559,18 @@ ALTER TABLE `unit`
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_karyawan` (`id_karyawan`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `karyawan`
+--
+ALTER TABLE `karyawan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -540,13 +582,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `keranjang_detail`
 --
 ALTER TABLE `keranjang_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan`
@@ -618,7 +660,7 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -685,6 +727,12 @@ ALTER TABLE `produk`
 --
 ALTER TABLE `produk_masuk`
   ADD CONSTRAINT `produk_masuk_ibfk_1` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
