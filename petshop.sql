@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Jan 2020 pada 00.05
+-- Waktu pembuatan: 31 Jan 2020 pada 15.00
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -98,7 +98,8 @@ INSERT INTO `laporan` (`id`, `no_doc`, `created_at`, `created_by`, `doc_type`) V
 (12, 'DOC/00002/PJ/31/01/2020', '2020-01-30 16:30:38', 'admin', 3),
 (13, 'DOC/00003/SM/31/01/2020', '2020-01-30 16:44:24', 'admin', 2),
 (14, 'DOC/00006/INV/31/01/2020', '2020-01-30 17:54:32', 'admin', 1),
-(21, 'DOC/00001/PN/31/01/2020', '2020-01-30 21:03:51', 'admin', 4);
+(21, 'DOC/00001/PN/31/01/2020', '2020-01-30 21:03:51', 'admin', 4),
+(22, 'DOC/00007/INV/31/01/2020', '2020-01-31 13:40:51', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +130,9 @@ INSERT INTO `laporan_inventory_detail` (`id`, `doc_id`, `produk`, `jumlah`) VALU
 (9, 8, 'Wiskas', 10),
 (10, 8, 'Kandang', 3),
 (11, 14, 'Wiskas', 15),
-(12, 14, 'Kandang', 0);
+(12, 14, 'Kandang', 0),
+(13, 22, 'Wiskas', 15),
+(14, 22, 'Kandang', 0);
 
 -- --------------------------------------------------------
 
@@ -262,7 +265,8 @@ CREATE TABLE `penitipan` (
 INSERT INTO `penitipan` (`id`, `nama_peliharaan`, `pemilik`, `catatan`, `tanggal_masuk`, `status`, `tanggal_keluar`) VALUES
 (1, 'Anggora', 1, 'Terserang virus corona', '2020-01-31 02:25:21', 1, '2020-01-31 04:21:35'),
 (2, 'Anggora', 1, 'Sedang sakit', '2020-01-31 03:45:18', 1, '2020-01-31 04:30:55'),
-(3, 'Pet', 1, 'Sehat', '2020-01-31 04:51:45', 0, NULL);
+(3, 'Pet', 1, 'Sehat', '2020-01-31 04:51:45', 0, NULL),
+(4, 'Kucing', 1, 'Sehat', '2020-01-31 21:38:08', 1, '2020-01-31 21:38:35');
 
 -- --------------------------------------------------------
 
@@ -548,13 +552,13 @@ ALTER TABLE `keranjang_detail`
 -- AUTO_INCREMENT untuk tabel `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_inventory_detail`
 --
 ALTER TABLE `laporan_inventory_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_penitipan_detail`
@@ -584,7 +588,7 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT untuk tabel `penitipan`
 --
 ALTER TABLE `penitipan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`

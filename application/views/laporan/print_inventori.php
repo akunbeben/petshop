@@ -31,8 +31,8 @@
 </tr>
 
 <tr>
-<td><strong>PETSHOP BANJARBARU</strong></td>
-<td>Alamat: <strong>JALAN SUKAMARA NO 11</strong></td>
+<td><strong>HOLY PETSHOP</strong></td>
+<td>Alamat: <strong>JL. INDRAKILA KAMPUNG TIMUR NO 22 BALIKPAPAN</strong></td>
 </tr>
 </table>
 

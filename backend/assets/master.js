@@ -102,6 +102,36 @@ $(document).ready( function() {
 });
 
 $(document).ready( function() {
+  $(document).on('click', '#edit-karyawan', function() {
+    var id = $(this).data('id');
+    var nama = $(this).data('nama');
+    var alamat = $(this).data('alamat');
+    var telepon = $(this).data('telepon');
+    var email = $(this).data('email');
+
+    $('#id_karyawan').val(id);
+    $('#editkaryawan').val(nama);
+    $('#editalamat').val(alamat);
+    $('#edittelepon').val(telepon);
+    $('#editemail').val(email);
+  });
+});
+
+$(document).ready( function() {
+  $(document).on('click', '#edit-pengguna', function() {
+    var id = $(this).data('id');
+    var id_karyawans = $(this).data('id_karyawans');
+    var username = $(this).data('username');
+    // var password = $(this).data('password');
+
+    $('#id_pengguna').val(id);
+    $('#editid_karyawan').val(id_karyawans);
+    $('#editusername').val(username);
+    // $('#editpassword').val(password);
+  });
+});
+
+$(document).ready( function() {
     $(document).on('click', '#edit-kategori', function() {
         var id_kategori = $(this).data('id');
         var nama_kategori = $(this).data('nama_kategori');

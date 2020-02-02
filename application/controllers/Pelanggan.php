@@ -50,10 +50,17 @@ class Pelanggan extends CI_Controller
                 'telepon'   => $this->input->post('edittelepon'),
                 'alamat'    => $this->input->post('editalamat')
             ];
-            // var_dump($param);
             $this->session->set_flashdata('sukses-produk', 'Data pelanggan berhasil diubah.');
             $this->PelangganModel->edit($param);
             redirect('pelanggan/');
         }
+    }
+
+    public function hapus()
+    {
+        $id = $this->input->post('id');
+        $this->PelangganModel->hapus($id);
+        $this->session->set_flashdata('sukses-produk', 'Data pelanggan berhasil dihapus.');
+        redirect('pelanggan/');
     }
 }

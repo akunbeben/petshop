@@ -19,7 +19,7 @@ class Penjualan extends CI_Controller {
             'customer'      => $this->PelangganModel->get()->result(),
             'produk'        => $this->ProdukModel->get()->result(),
             'keranjang'     => $this->PenjualanModel->carts()->result(),
-            'grand_total'   => $this->PenjualanModel->grandTotal()
+            'grand_total'   => $this->PenjualanModel->grandTotal()->row()->grand_total
         ];
         $this->template->load('layout/master', 'penjualan/index', $data);
     }

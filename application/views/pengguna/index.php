@@ -27,42 +27,40 @@
                             <h1 class="card-title">Data <?= $title; ?></h1>
                         </div>
                         <div class="float-right">
-                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#tbhPelangganModal"><i class="fa fa-plus"></i> TAMBAH PELANGGAN</button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#tbhpenggunaModal"><i class="fa fa-plus"></i> PENGGUNA BARU</button>
                         </div>
                     </div>
                     <div class="card-body">
                         <table id="produkTable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nama Pelanggan</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Alamat</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Username</th>
                                     <th>Opt.</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($pelanggan as $plg) : ?>
+                            <?php foreach ($pengguna as $plg) : ?>
                                 <tr>
                                     <td><?= $plg->nama; ?></td>
-                                    <td><?= $plg->telepon; ?></td>
-                                    <td><?= $plg->alamat; ?></td>
+                                    <td><?= $plg->username; ?></td>
                                     <td class="text-center" style="max-width: 50px;">
                                         <div class="row justify-content-center">
                                             <button 
-                                                id="edit-pelanggan"
+                                                id="edit-pengguna"
                                                 style="max-width: 45px;" 
                                                 class="btn btn-warning btn-sm" 
                                                 data-toggle="modal" 
-                                                data-target="#editpelangganModal"
+                                                data-target="#editpenggunaModal"
                                                 data-id="<?= $plg->id; ?>"
-                                                data-nama="<?= $plg->nama; ?>"
-                                                data-telepon="<?= $plg->telepon; ?>"
-                                                data-alamat="<?= $plg->alamat; ?>"
+                                                data-id_karyawans="<?= $plg->sub_id; ?>"
+                                                data-username="<?= $plg->username; ?>"
+                                                data-password="<?= $plg->password; ?>"
                                                 >
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
                                             &nbsp;
-                                            <form action="<?= base_url('pelanggan/hapus/'); ?>" method="post">
+                                            <form action="<?= base_url('pengguna/hapus/'); ?>" method="post">
                                                 <input type="hidden" name="id" value="<?= $plg->id; ?>">
                                                 <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
                                             </form>
@@ -81,38 +79,43 @@
 <!-- /.content -->
 
 <!-- Modal -->
-<div class="modal fade" id="tbhPelangganModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="tbhPelangganLabel" aria-hidden="true">
+<div class="modal fade" id="tbhpenggunaModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="tbhpenggunaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tbhPelangganLabel">Tambah <?= $title; ?></h5>
+                <h5 class="modal-title" id="tbhpenggunaLabel">Tambah <?= $title; ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-pelanggan" id="form-pelanggan" method="post" action="">
+                <form class="form-pengguna" id="form-pengguna" method="post" action="<?= base_url('pengguna/tambah') ; ?>">
                     <div class="form-group row">
-                        <label for="pelanggan" class="col-sm-3 col-form-label">Nama</label>
+                        <label for="pengguna" class="col-sm-3 col-form-label">Karyawan</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="pelanggan" placeholder="Nama pelanggan" name="pelanggan" required>
+                            <select class="form-control select-produk" id="id_karyawan" placeholder="id_karyawan" name="id_karyawan" required>
+                                <option value="">-- Pilih Karyawan --</option>
+                                <?php foreach ($karyawan as $key) : ?>
+                                <option value="<?= $key->id; ?>"><?= $key->nama; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="telepon" class="col-sm-3 col-form-label">Telepon</label>
+                        <label for="username" class="col-sm-3 col-form-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="telepon" placeholder="Nomor Telepon" name="telepon" required>
+                            <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="alamat" placeholder="Alamat Lengkap" name="alamat" required></textarea>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('form-pelanggan').reset();" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('form-pengguna').reset();" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -122,39 +125,32 @@
 <!-- End Modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="editpelangganModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editpelangganLabel" aria-hidden="true">
+<div class="modal fade" id="editpenggunaModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editpenggunaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="tbhPelangganLabel">Tambah <?= $title; ?></h5>
+            <h5 class="modal-title" id="tbhpenggunaLabel">Edit Data <?= $title; ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-editpelanggan" id="form-editpelanggan" method="post" action="<?= base_url('pelanggan/edit/'); ?>">
+                <form class="form-editpengguna" id="form-editpengguna" method="post" action="<?= base_url('pengguna/edit/'); ?>">
                     <div class="form-group row">
-                        <label for="editpelanggan" class="col-sm-3 col-form-label">Nama</label>
+                        <label for="editusername" class="col-sm-3 col-form-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="hidden" id="id_plg" name="id_plg">
-                            <input type="text" class="form-control" id="editpelanggan" placeholder="Nama pelanggan" name="editpelanggan" required>
+                            <input type="text" class="form-control" id="editusername" placeholder="Username" name="editusername" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="edittelepon" class="col-sm-3 col-form-label">Telepon</label>
+                        <label for="editpassword" class="col-sm-3 col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="edittelepon" placeholder="Nomor Telepon" name="edittelepon" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="editalamat" class="col-sm-3 col-form-label">Alamat</label>
-                        <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="editalamat" placeholder="Alamat Lengkap" name="editalamat" required></textarea>
+                            <input type="password" class="form-control" id="editpassword" placeholder="Password" name="editpassword" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('form-editpelanggan').reset();" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('form-editpengguna').reset();" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>

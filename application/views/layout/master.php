@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url(); ?>" class="brand-link text-center">
-      <span class="brand-text font-weight-light">PETSHOP</span>
+      <span class="brand-text font-weight-light">HOLY PETSHOP</span>
     </a>
 
     <!-- Sidebar -->
@@ -100,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="<?= base_url('backend/assets/'); ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><?= $this->session->userdata('nama'); ?></a>
         </div>
       </div>
 
@@ -109,6 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <?php if ($this->session->userdata('jabatan') == 1) : ?>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'master-data' ? 'menu-open' : '' ?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'master-data' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-database"></i>
@@ -146,6 +147,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?= base_url('karyawan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'karyawan' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-briefcase"></i>
+              <p>
+                Karyawan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('pengguna/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'pengguna' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Pengguna
+              </p>
+            </a>
+          </li>
+          <?php endif; ?>
+          <!-- <li class="nav-item">
+            <a href="<?= base_url('pengaturan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'pengaturan' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Pengaturan
+              </p>
+            </a>
+          </li> -->
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
             <a href="<?= base_url('penjualan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'penjualan' ? 'active' : '' ?>">

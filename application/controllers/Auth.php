@@ -48,6 +48,8 @@ class Auth extends CI_Controller
             if (password_verify($password, $getUser->password)) {
                 $data_session   = [
                     'username'      => $username,
+                    'nama'          => $getUser->nama,
+                    'jabatan'       => $getUser->jabatan,
                     'petshop-token' => password_hash($username, PASSWORD_DEFAULT)
                 ];
                 $this->session->set_userdata($data_session);
