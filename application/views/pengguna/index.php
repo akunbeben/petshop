@@ -139,6 +139,8 @@
                     <div class="form-group row">
                         <label for="editusername" class="col-sm-3 col-form-label">Username</label>
                         <div class="col-sm-9">
+                            <input type="hidden" name="id_pengguna" id="id_pengguna" required>
+                            <input type="hidden" name="editid_karyawan" id="editid_karyawan" required>
                             <input type="text" class="form-control" id="editusername" placeholder="Username" name="editusername" required>
                         </div>
                     </div>

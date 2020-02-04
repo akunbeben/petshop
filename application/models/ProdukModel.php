@@ -42,7 +42,7 @@ class ProdukModel extends CI_Model
                     produk_masuk
                     (produk_id, jumlah, created_by)
             VALUES
-                    ((SELECT id FROM produk ORDER BY id DESC LIMIT 1), 0, '" . $this->session->userdata('username') ."')
+                    ((SELECT id FROM produk ORDER BY id DESC LIMIT 1), 0, '" . $this->session->userdata('nama') ."')
         ");
     }
 

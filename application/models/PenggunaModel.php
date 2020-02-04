@@ -28,7 +28,7 @@ class PenggunaModel extends CI_Model {
     {
         $this->db->set('username', $data['username']);
         $this->db->set('password', $data['password']);
-        $this->db->where('id', $data['id']);
+        $this->db->where('id_karyawan', $data['id_karyawan']);
         $this->db->update('users');
     }
 }

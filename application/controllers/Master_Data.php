@@ -56,7 +56,7 @@ class Master_Data extends CI_Controller
                 'id'            => $id,
                 'stok-in'       => $this->input->post('jumlah_stok'),
                 'produk'        => $this->ProdukModel->get($id)->row()->stok,
-                'created_by'    => $this->session->userdata('username')
+                'created_by'    => $this->session->userdata('nama')
             ];
             $this->session->set_flashdata('sukses-produk', 'Stok produk berhasil ditambah.');
             $this->ProdukModel->stockin($param);

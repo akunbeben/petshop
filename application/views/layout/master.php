@@ -18,6 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- iCheck -->
   <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/jqvmap/jqvmap.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url('backend/assets/'); ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">

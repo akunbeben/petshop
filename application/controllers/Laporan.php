@@ -141,7 +141,7 @@ class Laporan extends CI_Controller
             'id'            => null,
             'no_doc'        => FormatNoTrans(invAutoID(), '/INV'),
             'created_at'    => date('Y-m-d H:i:s', time()),
-            'created_by'    => $this->session->userdata('username'),
+            'created_by'    => $this->session->userdata('nama'),
             'doc_type'      => 1
         ];
 
@@ -171,7 +171,7 @@ class Laporan extends CI_Controller
             'id'            => null,
             'no_doc'        => FormatNoTrans(stokAutoID(), '/SM'),
             'created_at'    => date('Y-m-d H:i:s', time()),
-            'created_by'    => $this->session->userdata('username'),
+            'created_by'    => $this->session->userdata('nama'),
             'doc_type'      => 2
         ];
 
@@ -203,7 +203,7 @@ class Laporan extends CI_Controller
             'id'            => null,
             'no_doc'        => FormatNoTrans(penjualanAutoID(), '/PJ'),
             'created_at'    => date('Y-m-d H:i:s', time()),
-            'created_by'    => $this->session->userdata('username'),
+            'created_by'    => $this->session->userdata('nama'),
             'doc_type'      => 3
         ];
 
@@ -234,7 +234,7 @@ class Laporan extends CI_Controller
             'id'            => null,
             'no_doc'        => FormatNoTrans(penitipanAutoID(), '/PN'),
             'created_at'    => date('Y-m-d H:i:s', time()),
-            'created_by'    => $this->session->userdata('username'),
+            'created_by'    => $this->session->userdata('nama'),
             'doc_type'      => 4
         ];
 

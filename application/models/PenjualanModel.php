@@ -23,10 +23,10 @@ class PenjualanModel extends CI_Model{
     {
         $query = "SELECT sum(subtotal) AS grand_total FROM keranjang_detail HAVING (sum(subtotal) > 0)";
         $execute = $this->db->query($query);
-        if ($execute->num_rows() == 0) {
+        if ($execute->row() == null) {
             return 0;
         } else {
-            return $execute;
+            return $execute->row()->grand_total;
         }
     }
 
@@ -102,7 +102,7 @@ class PenjualanModel extends CI_Model{
 
     public function last_row()
     {
-        return $this->db->from('penjualan')->order_by('faktur DESC')->limit(1)->get()->row();
+        return $this->db->from('penjualan')->order_by('waktu_transaksi DESC')->limit(1)->get()->row();
     }
 
     public function addDetail($no_invoice)
@@ -114,7 +114,7 @@ class PenjualanModel extends CI_Model{
 
     public function nota_header()
     {
-        $this->db->order_by('faktur DESC');
+        $this->db->order_by('waktu_transaksi DESC');
         $this->db->limit(1);
         return $this->db->get('penjualan');
     }

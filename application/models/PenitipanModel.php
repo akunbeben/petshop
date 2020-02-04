@@ -7,7 +7,7 @@ class PenitipanModel extends CI_Model{
     {
         $this->db->select('penitipan.*, pelanggan.nama, pelanggan.id id_pemilik');
         $this->db->join('pelanggan', 'pelanggan.id = penitipan.pemilik');
-        $this->db->where('status', 0);
+        $this->db->where('penitipan.status', 0);
         if ($id !== null) {
             $this->db->where('id', $id);
         }
@@ -18,7 +18,7 @@ class PenitipanModel extends CI_Model{
     {
         $this->db->select('penitipan.*, pelanggan.nama, pelanggan.id id_pemilik');
         $this->db->join('pelanggan', 'pelanggan.id = penitipan.pemilik');
-        $this->db->where('status', 1);
+        $this->db->where('penitipan.status', 1);
         if ($id !== null) {
             $this->db->where('id', $id);
         }

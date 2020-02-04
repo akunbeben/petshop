@@ -8,7 +8,7 @@ class Pengguna extends CI_Controller{
         parent::__construct();
         $this->load->model('PelangganModel');
         $this->load->model('PenggunaModel');
-        $this->load->model('PenggunaModel');
+        $this->load->model('KaryawanModel');
     }
 
     public function index()
@@ -16,7 +16,7 @@ class Pengguna extends CI_Controller{
         $data = [
             'title'     => 'Pengguna',
             'pengguna'  => $this->PenggunaModel->get()->result(),
-            'karyawan'  => $this->PenggunaModel->get()->result()
+            'karyawan'  => $this->KaryawanModel->get()->result()
         ];
         $this->template->load('layout/master', 'pengguna/index', $data);
     }

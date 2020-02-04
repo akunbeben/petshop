@@ -19,9 +19,11 @@ class Penjualan extends CI_Controller {
             'customer'      => $this->PelangganModel->get()->result(),
             'produk'        => $this->ProdukModel->get()->result(),
             'keranjang'     => $this->PenjualanModel->carts()->result(),
-            'grand_total'   => $this->PenjualanModel->grandTotal()->row()->grand_total
+            'grand_total'   => $this->PenjualanModel->grandTotal()
         ];
         $this->template->load('layout/master', 'penjualan/index', $data);
+        // dd($data);
+        // die;
     }
     
     public function addtocart()
@@ -104,16 +106,16 @@ class Penjualan extends CI_Controller {
         }
         $data = [
             'faktur'            => noFaktur(fakturAutoID()),
-            'kasir'             => $this->session->userdata('username'),
+            'kasir'             => $this->session->userdata('nama'),
             'pelanggan'         => $pelanggan,
-            'total'             => $this->PenjualanModel->grandTotal()->row()->grand_total,
+            'total'             => $this->PenjualanModel->grandTotal(),
             'profit'            => $this->PenjualanModel->profit(),
             'bayar'             => $this->input->post('bayar'),
-            'kembalian'         => $this->input->post('bayar') - $this->PenjualanModel->grandTotal()->row()->grand_total,
+            'kembalian'         => $this->input->post('bayar') - $this->PenjualanModel->grandTotal(),
             'waktu_transaksi'   => date('Y-m-d H:i:s', time())
         ];
 
-        if ($this->PenjualanModel->grandTotal()->num_rows() <= 0) {
+        if ($this->PenjualanModel->grandTotal() <= 0) {
             $this->session->set_flashdata('gagal-produk', 'Keranjang belanja masih kosong.');
             redirect('penjualan/');
         } else {

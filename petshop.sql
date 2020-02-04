@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Feb 2020 pada 23.14
+-- Waktu pembuatan: 04 Feb 2020 pada 18.25
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -44,7 +44,8 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `email`, `telepon`, `jabatan`, `start_date`, `status`) VALUES
-(1, 'Dwyne Johnson', 'Banjarmasin', 'example@mail.com', '080111111111', 1, '2020-02-03 02:43:57', 0);
+(1, 'Dwyne Johnson', 'Banjarmasin', 'example@mail.com', '080111111111', 1, '2020-02-03 02:43:57', 0),
+(4, 'Mike Tyson', 'JALAN', 'akunbeben@gmail.com', '088888888', 2, '2020-02-04 23:23:13', 0);
 
 -- --------------------------------------------------------
 
@@ -79,13 +80,6 @@ CREATE TABLE `keranjang` (
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `keranjang`
---
-
-INSERT INTO `keranjang` (`id`, `produk_id`, `qty`) VALUES
-(31, 3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -98,13 +92,6 @@ CREATE TABLE `keranjang_detail` (
   `subtotal` int(11) NOT NULL,
   `profit` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `keranjang_detail`
---
-
-INSERT INTO `keranjang_detail` (`id`, `keranjang_id`, `subtotal`, `profit`) VALUES
-(22, 31, 20000, 10000);
 
 -- --------------------------------------------------------
 
@@ -137,7 +124,10 @@ INSERT INTO `laporan` (`id`, `no_doc`, `created_at`, `created_by`, `doc_type`) V
 (13, 'DOC/00003/SM/31/01/2020', '2020-01-30 16:44:24', 'admin', 2),
 (14, 'DOC/00006/INV/31/01/2020', '2020-01-30 17:54:32', 'admin', 1),
 (21, 'DOC/00001/PN/31/01/2020', '2020-01-30 21:03:51', 'admin', 4),
-(22, 'DOC/00007/INV/31/01/2020', '2020-01-31 13:40:51', 'admin', 1);
+(22, 'DOC/00007/INV/31/01/2020', '2020-01-31 13:40:51', 'admin', 1),
+(23, 'DOC/00003/PJ/04/02/2020', '2020-02-04 15:15:33', 'admin', 3),
+(24, 'DOC/00004/PJ/04/02/2020', '2020-02-04 15:17:02', 'Dwyne Johnson', 3),
+(25, 'DOC/00008/INV/04/02/2020', '2020-02-04 15:25:51', 'Mike Tyson', 1);
 
 -- --------------------------------------------------------
 
@@ -170,7 +160,9 @@ INSERT INTO `laporan_inventory_detail` (`id`, `doc_id`, `produk`, `jumlah`) VALU
 (11, 14, 'Wiskas', 15),
 (12, 14, 'Kandang', 0),
 (13, 22, 'Wiskas', 15),
-(14, 22, 'Kandang', 0);
+(14, 22, 'Kandang', 0),
+(15, 25, 'Wiskas', 4),
+(16, 25, 'Kandang', 10);
 
 -- --------------------------------------------------------
 
@@ -219,7 +211,11 @@ INSERT INTO `laporan_penjualan_detail` (`id`, `doc_id`, `faktur`, `total`, `prof
 (4, 12, 'P2601200002', 80000, 40000),
 (5, 12, 'P2701200003', 40000, 20000),
 (6, 12, 'P2701200004', 40000, 20000),
-(7, 12, 'P3001200005', 40000, 20000);
+(7, 12, 'P3001200005', 40000, 20000),
+(8, 23, 'P0402200001', 40000, 20000),
+(9, 23, 'P0402200002', 80000, 40000),
+(10, 24, 'P0402200001', 40000, 20000),
+(11, 24, 'P0402200002', 80000, 40000);
 
 -- --------------------------------------------------------
 
@@ -278,7 +274,8 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id`, `nama`, `telepon`, `alamat`, `status`) VALUES
 (2, 'Charina Zahratunnisa', '082253054008', 'Jalan Sukamara No 11 RT 06 RW 02', 0),
-(3, 'Hehen', '128371923', 'Banjarmasin', 0);
+(3, 'Hehen', '128371923', 'Banjarmasin', 0),
+(4, 'Dwyne Johnson', '123123123', 'Jalanan', 0);
 
 -- --------------------------------------------------------
 
@@ -295,6 +292,13 @@ CREATE TABLE `penitipan` (
   `status` int(11) NOT NULL,
   `tanggal_keluar` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `penitipan`
+--
+
+INSERT INTO `penitipan` (`id`, `nama_peliharaan`, `pemilik`, `catatan`, `tanggal_masuk`, `status`, `tanggal_keluar`) VALUES
+(5, 'Kucing', 3, 'Sakit', '2020-02-04 23:19:56', 1, '2020-02-04 23:20:00');
 
 -- --------------------------------------------------------
 
@@ -318,11 +322,11 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`faktur`, `kasir`, `pelanggan`, `total`, `profit`, `bayar`, `kembalian`, `waktu_transaksi`) VALUES
-('P2601200001', 'admin', 'Umum', 20000, 10000, 30000, 10000, '2020-01-26 21:03:22'),
-('P2601200002', 'admin', 'Umum', 80000, 40000, 100000, 20000, '2020-01-26 21:07:05'),
-('P2701200003', 'admin', 'Umum', 40000, 20000, 50000, 10000, '2020-01-27 00:24:51'),
-('P2701200004', 'admin', 'Umum', 40000, 20000, 50000, 10000, '2020-01-27 00:28:50'),
-('P3001200005', 'admin', 'Benny Rahmat', 40000, 20000, 50000, 10000, '2020-01-30 21:18:51');
+('P0402200001', 'admin', 'Umum', 40000, 20000, 60000, 20000, '2020-02-04 23:13:36'),
+('P0402200002', 'Dwyne Johnson', 'Umum', 80000, 40000, 100000, 20000, '2020-02-04 23:15:22'),
+('P0502200003', 'Dwyne Johnson', 'Umum', 20000, 10000, 20000, 0, '2020-02-05 00:50:23'),
+('P0502200004', 'Dwyne Johnson', 'Umum', 60000, 30000, 80000, 20000, '2020-02-05 01:21:20'),
+('P0502200005', 'Dwyne Johnson', 'Umum', 80000, 40000, 100000, 20000, '2020-02-05 01:22:19');
 
 -- --------------------------------------------------------
 
@@ -342,12 +346,11 @@ CREATE TABLE `penjualan_detail` (
 --
 
 INSERT INTO `penjualan_detail` (`id`, `faktur_id`, `produk`, `jumlah_terjual`) VALUES
-(3, 'P2601200001', 3, 1),
-(4, 'P2601200002', 3, 1),
-(5, 'P2601200002', 4, 3),
-(7, 'P2701200003', 3, 2),
-(8, 'P2701200004', 3, 2),
-(9, 'P3001200005', 3, 2);
+(19, 'P0402200001', 3, 2),
+(20, 'P0402200002', 3, 4),
+(21, 'P0502200003', 3, 1),
+(22, 'P0502200004', 3, 3),
+(23, 'P0502200005', 3, 4);
 
 -- --------------------------------------------------------
 
@@ -372,8 +375,8 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama_produk`, `stok`, `gambar`, `kategori`, `unit`, `harga_beli`, `harga_jual`, `profit`) VALUES
-(3, 'Wiskas', 14, 'default.png', 1, 2, 10000, 20000, 10000),
-(4, 'Kandang', 0, 'default.png', 2, 1, 10000, 20000, 10000);
+(3, 'Wiskas', 2, 'default.png', 1, 2, 10000, 20000, 10000),
+(4, 'Kandang', 10, 'default.png', 2, 1, 10000, 20000, 10000);
 
 -- --------------------------------------------------------
 
@@ -399,7 +402,8 @@ INSERT INTO `produk_masuk` (`id`, `produk_id`, `jumlah`, `time_stamp`, `created_
 (5, 3, 10, '2020-01-25 12:19:56', 'admin'),
 (6, 4, 1, '2020-01-25 12:20:04', 'admin'),
 (7, 4, 2, '2020-01-25 12:20:10', 'admin'),
-(8, 3, 10, '2020-01-30 16:44:06', 'admin');
+(8, 3, 10, '2020-01-30 16:44:06', 'admin'),
+(9, 3, 6, '2020-02-04 15:58:23', 'Dwyne Johnson');
 
 -- --------------------------------------------------------
 
@@ -441,7 +445,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `id_karyawan`, `username`, `password`, `status`) VALUES
-(1, 1, 'admin', '$2y$10$m2J9wPk4gtbJn3qEQbc.yeSIZBVcG0kPQCU8TnF4IhTfGdVYFFRKq', 0);
+(1, 1, 'admin', '$2y$10$bP7mmm2F3JnV7TfE4Z0E2eRaOVBhUYcudIdFB39KirwYnhoVDSGim', 0),
+(13, 4, 'mike', '$2y$10$cp2Oj47k3Tk5SMhOEr27vuDZ9n4/oESDzmwCLqTjH/zgk0ujNxFuC', 0);
 
 --
 -- Indexes for dumped tables
@@ -570,7 +575,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -582,25 +587,25 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT untuk tabel `keranjang_detail`
 --
 ALTER TABLE `keranjang_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_inventory_detail`
 --
 ALTER TABLE `laporan_inventory_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_penitipan_detail`
@@ -612,7 +617,7 @@ ALTER TABLE `laporan_penitipan_detail`
 -- AUTO_INCREMENT untuk tabel `laporan_penjualan_detail`
 --
 ALTER TABLE `laporan_penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_stok_detail`
@@ -624,19 +629,19 @@ ALTER TABLE `laporan_stok_detail`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `penitipan`
 --
 ALTER TABLE `penitipan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
@@ -648,7 +653,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT untuk tabel `produk_masuk`
 --
 ALTER TABLE `produk_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `unit`
@@ -660,7 +665,7 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -701,12 +706,6 @@ ALTER TABLE `laporan_penjualan_detail`
 --
 ALTER TABLE `laporan_stok_detail`
   ADD CONSTRAINT `laporan_stok_detail_ibfk_1` FOREIGN KEY (`doc_id`) REFERENCES `laporan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `penitipan`
---
-ALTER TABLE `penitipan`
-  ADD CONSTRAINT `penitipan_ibfk_1` FOREIGN KEY (`pemilik`) REFERENCES `pelanggan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `penjualan_detail`
