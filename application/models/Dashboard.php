@@ -28,7 +28,7 @@ class Dashboard extends CI_Model
 
     public function get_penjualan()
     {
-        $query = "SELECT COUNT(faktur) as total FROM penjualan WHERE waktu_transaksi >= CURDATE()";
+        $query = "SELECT COUNT(faktur) as total FROM penjualan WHERE waktu_transaksi >= CURDATE() AND aktif = 0";
         $execute = $this->db->query($query);
         if ($execute->row() == null) {
             return null;
@@ -54,9 +54,9 @@ class Dashboard extends CI_Model
             SELECT
                 ( 
                      ( 
-                        (SELECT SUM(profit) AS profit FROM penjualan WHERE waktu_transaksi >= CURDATE()) 
+                        (SELECT SUM(profit) AS profit FROM penjualan WHERE waktu_transaksi >= CURDATE() AND aktif = 1) 
                 /
-                        (SELECT SUM(profit) AS profit FROM penjualan WHERE waktu_transaksi >= SUBDATE(CURDATE(),1) AND waktu_transaksi <= CURDATE())
+                        (SELECT SUM(profit) AS profit FROM penjualan WHERE waktu_transaksi >= SUBDATE(CURDATE(),1) AND waktu_transaksi <= CURDATE() AND aktif = 1)
                     ) * 100
                 ) 
             AS profit

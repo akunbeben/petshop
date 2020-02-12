@@ -9,6 +9,7 @@ class Pengguna extends CI_Controller{
         $this->load->model('PelangganModel');
         $this->load->model('PenggunaModel');
         $this->load->model('KaryawanModel');
+        is_not_login();
     }
 
     public function index()

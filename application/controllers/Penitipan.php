@@ -8,6 +8,7 @@ class Penitipan extends CI_Controller{
         parent::__construct();
         $this->load->model('PenitipanModel');
         $this->load->model('PelangganModel');
+        is_not_login();
     }
 
     public function index()

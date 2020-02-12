@@ -111,6 +111,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <?php if ($this->session->userdata('jabatan') == 1) : ?>
+          <li class="nav-header">MAIN DATA</li>
+          <li class="nav-item">
+            <a href="<?= base_url('data-penjualan/'); ?>" class="nav-link <?= $this->uri->segment(1) == 'data-penjualan' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-briefcase"></i>
+              <p>
+                Data Penjualan
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">MASTER DATA</li>
           <li class="nav-item has-treeview <?= $this->uri->segment(1) == 'master-data' ? 'menu-open' : '' ?>">
             <a href="#" class="nav-link <?= $this->uri->segment(1) == 'master-data' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-database"></i>

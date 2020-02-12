@@ -5,6 +5,7 @@ class PenjualanModel extends CI_Model{
 
     public function get()
     {
+        $this->db->where('aktif', 0);
         return $this->db->get('penjualan');
     }
 
@@ -126,5 +127,12 @@ class PenjualanModel extends CI_Model{
         $this->db->where('faktur_id', $faktur);
         $this->db->from('penjualan_detail');
         return $this->db->get();
+    }
+
+    public function hapus_penjualan($id)
+    {
+        $this->db->set('aktif', 1);
+        $this->db->where('faktur', $id);
+        $this->db->update('penjualan');
     }
 }
