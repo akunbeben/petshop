@@ -115,6 +115,7 @@ class PenjualanModel extends CI_Model{
 
     public function nota_header()
     {
+        $this->db->where('aktif', 0);
         $this->db->order_by('waktu_transaksi DESC');
         $this->db->limit(1);
         return $this->db->get('penjualan');
