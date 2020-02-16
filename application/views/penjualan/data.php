@@ -20,11 +20,49 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Filter data</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="display: block;">
+                        <form action="" method="post">
+                            <div class="form-group row">
+                                <div class="col-md-5">
+                                    <div class="col-sm-12">
+                                        <label for="tanggal_awal">Tanggal awal</label>
+                                        <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="col-sm-12">
+                                        <label for="tanggal_akhir">Tanggal akhir</label>
+                                        <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="margin-top: 31.5px;">
+                                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-search"></i> Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <h1 class="card-title">Data <?= $title; ?></h1>
+                            <h1 class="card-title">Data <?= $title; ?> hari ini</h1>
                         </div>
                     </div>
                     <div class="card-body">

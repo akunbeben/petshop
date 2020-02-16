@@ -6,6 +6,8 @@ class PenjualanModel extends CI_Model{
     public function get()
     {
         $this->db->where('aktif', 0);
+        $this->db->where('waktu_transaksi >=', date('Y-m-d', time()) . ' 00:00:00' .')');
+        $this->db->where('waktu_transaksi <=', date('Y-m-d', time()) . ' 23:59:59' .')');
         return $this->db->get('penjualan');
     }
 
@@ -135,5 +137,13 @@ class PenjualanModel extends CI_Model{
         $this->db->set('aktif', 1);
         $this->db->where('faktur', $id);
         $this->db->update('penjualan');
+    }
+
+    public function filterPenjualan($dateRange)
+    {
+        $this->db->where('aktif', 0);
+        $this->db->where('waktu_transaksi >=', $dateRange['tanggal_awal']);
+        $this->db->where('waktu_transaksi <=', $dateRange['tanggal_akhir']);
+        return $this->db->get('penjualan');
     }
 }

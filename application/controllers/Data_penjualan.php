@@ -12,11 +12,26 @@ class Data_penjualan extends CI_Controller {
 
     public function index()
     {
-        $data = [
-            'title'     => 'Data Penjualan',
-            'penjualan' => $this->PenjualanModel->get()->result()
-        ];
-        $this->template->load('layout/master', 'penjualan/data', $data);
+        $this->form_validation->set_rules('tanggal_awal', 'Tanggal Awal', 'required');
+        $this->form_validation->set_rules('tanggal_akhir', 'Tanggal Akhir', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $data = [
+                'title'     => 'Data Penjualan',
+                'penjualan' => $this->PenjualanModel->get()->result()
+            ];
+            $this->template->load('layout/master', 'penjualan/data', $data);
+        } else {
+            $dateRange = [
+                'tanggal_awal' => $this->input->post('tanggal_awal') . ' 00:00:00',
+                'tanggal_akhir' => $this->input->post('tanggal_akhir') . ' 23:59:59'
+            ];
+            $data = [
+                'title'     => 'Data Penjualan',
+                'penjualan' => $this->PenjualanModel->filterPenjualan($dateRange)->result()
+            ];
+            $this->template->load('layout/master', 'penjualan/data', $data);
+        }
     }
 
     public function hapus()
