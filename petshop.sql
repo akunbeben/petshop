@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Feb 2020 pada 20.28
+-- Waktu pembuatan: 16 Feb 2020 pada 13.58
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -130,7 +130,11 @@ INSERT INTO `laporan` (`id`, `no_doc`, `created_at`, `created_by`, `doc_type`) V
 (25, 'DOC/00008/INV/04/02/2020', '2020-02-04 15:25:51', 'Mike Tyson', 1),
 (26, 'DOC/00009/INV/07/02/2020', '2020-02-06 21:11:44', 'Dwyne Johnson', 1),
 (27, 'DOC/00005/PJ/13/02/2020', '2020-02-12 18:13:17', 'Dwyne Johnson', 3),
-(28, 'DOC/00006/PJ/13/02/2020', '2020-02-12 19:19:54', 'Dwyne Johnson', 3);
+(28, 'DOC/00006/PJ/13/02/2020', '2020-02-12 19:19:54', 'Dwyne Johnson', 3),
+(29, 'DOC/00010/INV/15/02/2020', '2020-02-15 12:12:38', 'Dwyne Johnson', 1),
+(30, 'DOC/00007/PJ/15/02/2020', '2020-02-15 12:14:09', 'Dwyne Johnson', 3),
+(31, 'DOC/00008/PJ/16/02/2020', '2020-02-16 09:51:07', 'Dwyne Johnson', 3),
+(32, 'DOC/00009/PJ/16/02/2020', '2020-02-16 12:54:57', 'Dwyne Johnson', 3);
 
 -- --------------------------------------------------------
 
@@ -167,7 +171,9 @@ INSERT INTO `laporan_inventory_detail` (`id`, `doc_id`, `produk`, `jumlah`) VALU
 (15, 25, 'Wiskas', 4),
 (16, 25, 'Kandang', 10),
 (17, 26, 'Wiskas', 0),
-(18, 26, 'Kandang', 10);
+(18, 26, 'Kandang', 10),
+(19, 29, 'Wiskas', 10),
+(20, 29, 'Kandang', 8);
 
 -- --------------------------------------------------------
 
@@ -233,7 +239,20 @@ INSERT INTO `laporan_penjualan_detail` (`id`, `doc_id`, `faktur`, `total`, `prof
 (21, 28, 'P0502200004', 60000, 30000),
 (22, 28, 'P0502200005', 80000, 40000),
 (23, 28, 'P0602200006', 40000, 20000),
-(24, 28, 'P1302200007', 40000, 20000);
+(24, 28, 'P1302200007', 40000, 20000),
+(25, 30, 'P0402200002', 80000, 40000),
+(26, 30, 'P0502200003', 20000, 10000),
+(27, 30, 'P0502200004', 60000, 30000),
+(28, 30, 'P0502200005', 80000, 40000),
+(29, 30, 'P0602200006', 40000, 20000),
+(30, 30, 'P1502200008', 40000, 20000),
+(31, 31, 'P0402200002', 80000, 40000),
+(32, 31, 'P0502200003', 20000, 10000),
+(33, 31, 'P0502200004', 60000, 30000),
+(34, 31, 'P0502200005', 80000, 40000),
+(35, 31, 'P0602200006', 40000, 20000),
+(36, 31, 'P1502200008', 40000, 20000),
+(37, 32, 'P1602200009', 20000, 10000);
 
 -- --------------------------------------------------------
 
@@ -316,7 +335,8 @@ CREATE TABLE `penitipan` (
 --
 
 INSERT INTO `penitipan` (`id`, `nama_peliharaan`, `pemilik`, `catatan`, `tanggal_masuk`, `status`, `tanggal_keluar`) VALUES
-(5, 'Kucing', 3, 'Sakit', '2020-02-04 23:19:56', 1, '2020-02-04 23:20:00');
+(5, 'Kucing', 3, 'Sakit', '2020-02-04 23:19:56', 1, '2020-02-04 23:20:00'),
+(6, 'Tsar', 4, 'Sehat', '2020-02-15 20:14:44', 1, '2020-02-15 20:14:51');
 
 -- --------------------------------------------------------
 
@@ -347,7 +367,9 @@ INSERT INTO `penjualan` (`faktur`, `kasir`, `pelanggan`, `total`, `profit`, `bay
 ('P0502200004', 'Dwyne Johnson', 'Umum', 60000, 30000, 80000, 20000, '2020-02-05 01:21:20', 0),
 ('P0502200005', 'Dwyne Johnson', 'Umum', 80000, 40000, 100000, 20000, '2020-02-05 01:22:19', 0),
 ('P0602200006', 'Dwyne Johnson', 'Umum', 40000, 20000, 50000, 10000, '2020-02-06 20:37:46', 0),
-('P1302200007', 'Dwyne Johnson', 'Dwyne Johnson', 40000, 20000, 50000, 10000, '2020-02-13 02:11:41', 1);
+('P1302200007', 'Dwyne Johnson', 'Dwyne Johnson', 40000, 20000, 50000, 10000, '2020-02-13 02:11:41', 1),
+('P1502200008', 'Dwyne Johnson', 'Umum', 40000, 20000, 50000, 10000, '2020-02-15 20:13:46', 0),
+('P1602200009', 'Dwyne Johnson', 'Umum', 20000, 10000, 20000, 0, '2020-02-16 20:44:01', 0);
 
 -- --------------------------------------------------------
 
@@ -373,7 +395,9 @@ INSERT INTO `penjualan_detail` (`id`, `faktur_id`, `produk`, `jumlah_terjual`) V
 (22, 'P0502200004', 3, 3),
 (23, 'P0502200005', 3, 4),
 (24, 'P0602200006', 3, 2),
-(25, 'P1302200007', 4, 2);
+(25, 'P1302200007', 4, 2),
+(26, 'P1502200008', 3, 2),
+(27, 'P1602200009', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -398,7 +422,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama_produk`, `stok`, `gambar`, `kategori`, `unit`, `harga_beli`, `harga_jual`, `profit`) VALUES
-(3, 'Wiskas', 0, 'default.png', 1, 2, 10000, 20000, 10000),
+(3, 'Wiskas', 7, 'default.png', 1, 2, 10000, 20000, 10000),
 (4, 'Kandang', 8, 'default.png', 2, 1, 10000, 20000, 10000);
 
 -- --------------------------------------------------------
@@ -426,7 +450,8 @@ INSERT INTO `produk_masuk` (`id`, `produk_id`, `jumlah`, `time_stamp`, `created_
 (6, 4, 1, '2020-01-25 12:20:04', 'admin'),
 (7, 4, 2, '2020-01-25 12:20:10', 'admin'),
 (8, 3, 10, '2020-01-30 16:44:06', 'admin'),
-(9, 3, 6, '2020-02-04 15:58:23', 'Dwyne Johnson');
+(9, 3, 6, '2020-02-04 15:58:23', 'Dwyne Johnson'),
+(10, 3, 10, '2020-02-15 12:12:26', 'Dwyne Johnson');
 
 -- --------------------------------------------------------
 
@@ -469,7 +494,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `id_karyawan`, `username`, `password`, `status`) VALUES
 (1, 1, 'admin', '$2y$10$bP7mmm2F3JnV7TfE4Z0E2eRaOVBhUYcudIdFB39KirwYnhoVDSGim', 0),
-(13, 4, 'mike', '$2y$10$cp2Oj47k3Tk5SMhOEr27vuDZ9n4/oESDzmwCLqTjH/zgk0ujNxFuC', 0);
+(13, 4, 'mike', '$2y$10$c.0cwzUk7XwTjxZ15RLJSuzNDiBwwYfAJOTUplyNGyWfIu75rXUgS', 0);
 
 --
 -- Indexes for dumped tables
@@ -610,25 +635,25 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT untuk tabel `keranjang_detail`
 --
 ALTER TABLE `keranjang_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_inventory_detail`
 --
 ALTER TABLE `laporan_inventory_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_penitipan_detail`
@@ -640,7 +665,7 @@ ALTER TABLE `laporan_penitipan_detail`
 -- AUTO_INCREMENT untuk tabel `laporan_penjualan_detail`
 --
 ALTER TABLE `laporan_penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan_stok_detail`
@@ -658,13 +683,13 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT untuk tabel `penitipan`
 --
 ALTER TABLE `penitipan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
@@ -676,7 +701,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT untuk tabel `produk_masuk`
 --
 ALTER TABLE `produk_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `unit`
