@@ -1,13 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class PenjualanModel extends CI_Model{
+class PenjualanModel extends CI_Model
+{
 
     public function get()
     {
         $this->db->where('aktif', 0);
-        $this->db->where('waktu_transaksi >=', date('Y-m-d', time()) . ' 00:00:00' .')');
-        $this->db->where('waktu_transaksi <=', date('Y-m-d', time()) . ' 23:59:59' .')');
+        $this->db->where('waktu_transaksi >=', date('Y-m-01', time()) . ' 00:00:00' . ')');
+        $this->db->where('waktu_transaksi <=', date('Y-m-d', time()) . ' 23:59:59' . ')');
         return $this->db->get('penjualan');
     }
 
@@ -53,14 +54,14 @@ class PenjualanModel extends CI_Model{
 
     public function tambah($id)
     {
-        $this->db->set('qty','qty + 1', FALSE);
+        $this->db->set('qty', 'qty + 1', FALSE);
         $this->db->where('produk_id', $id);
         $this->db->update('keranjang');
     }
 
     public function kurang($id)
     {
-        $this->db->set('qty','qty - 1', FALSE);
+        $this->db->set('qty', 'qty - 1', FALSE);
         $this->db->where('produk_id', $id);
         $this->db->update('keranjang');
     }
@@ -73,7 +74,7 @@ class PenjualanModel extends CI_Model{
         $this->db->where('produk_id', $id);
         return $this->db->get();
     }
-    
+
     public function addtocartdetail($param)
     {
         $this->db->insert('keranjang_detail', $param);

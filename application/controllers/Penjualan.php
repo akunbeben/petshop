@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Penjualan extends CI_Controller {
+class Penjualan extends CI_Controller
+{
 
     public function __construct()
     {
@@ -25,7 +26,7 @@ class Penjualan extends CI_Controller {
         // dd($data);
         // die;
     }
-    
+
     public function addtocart()
     {
         $param = [
@@ -34,7 +35,7 @@ class Penjualan extends CI_Controller {
             'qty'           => 0
         ];
         $this->PenjualanModel->addtocart($param);
-        
+
         $getCartDetail = $this->PenjualanModel->getCartDetail($param['produk_id'])->row();
 
         $cart = [
@@ -120,7 +121,7 @@ class Penjualan extends CI_Controller {
             redirect('penjualan/');
         } else {
             $this->PenjualanModel->proses($data);
-            $this->PenjualanModel->addDetail($this->PenjualanModel->last_row()->faktur);
+            $this->PenjualanModel->addDetail($data['faktur']);
             $this->PenjualanModel->clear();
             $cashback       = $this->PenjualanModel->last_row()->cashback;
             if ($cashback == 0) {

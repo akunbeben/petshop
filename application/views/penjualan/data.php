@@ -7,14 +7,14 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Master Data</a></li>
-                <li class="breadcrumb-item active"><?= $title; ?></li>
+                    <li class="breadcrumb-item"><a href="#">Master Data</a></li>
+                    <li class="breadcrumb-item active"><?= $title; ?></li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
-    <!-- /.content-header -->
+<!-- /.content-header -->
 
 <!-- Main content -->
 <div class="content">
@@ -61,8 +61,9 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="float-left">
-                            <h1 class="card-title">Data <?= $title; ?> hari ini</h1>
+                        <div class="d-flex justify-content-between">
+                            <h1 class="card-title"><?= $title; ?> 1 Bulan terakhir</h1>
+                            <a href="<?= base_url('data-penjualan/detail-profit'); ?>">Detail Profit</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -79,24 +80,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($penjualan as $pj) : ?>
-                                <tr>
-                                    <td><?= $pj->faktur; ?></td>
-                                    <td><?= $pj->kasir; ?></td>
-                                    <td><?= $pj->pelanggan ?></td>
-                                    <td><?= rupiah($pj->total); ?></td>
-                                    <td><?= rupiah($pj->bayar); ?></td>
-                                    <td><?= date('d M Y H:i:s', strtotime($pj->waktu_transaksi)); ?></td>
-                                    <td class="text-center" style="max-width: 50px;">
-                                        <div class="row justify-content-center">
-                                            <form action="<?= base_url('data-penjualan/hapus/'); ?>" method="post">
-                                                <input type="hidden" name="id" value="<?= $pj->faktur; ?>">
-                                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                                <?php foreach ($penjualan as $pj) : ?>
+                                    <tr>
+                                        <td><?= $pj->faktur; ?></td>
+                                        <td><?= $pj->kasir; ?></td>
+                                        <td><?= $pj->pelanggan ?></td>
+                                        <td><?= rupiah($pj->total); ?></td>
+                                        <td><?= rupiah($pj->bayar); ?></td>
+                                        <td><?= date('d M Y H:i:s', strtotime($pj->waktu_transaksi)); ?></td>
+                                        <td class="text-center" style="max-width: 50px;">
+                                            <div class="row justify-content-center">
+                                                <form action="<?= base_url('data-penjualan/hapus/'); ?>" method="post">
+                                                    <input type="hidden" name="id" value="<?= $pj->faktur; ?>">
+                                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
