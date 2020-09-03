@@ -73,7 +73,8 @@
           </div>
           <div class="card-footer text-right">
             <span class="">
-              <i class="fas fa-square text-primary"></i> Omset
+              <i class="fas fa-square text-secondary"></i> Omset Penitipan &nbsp;
+              <i class="fas fa-square text-primary"></i> Omset Penjualan
             </span>
           </div>
         </div>
@@ -92,12 +93,13 @@
           </div>
           <div class="card-footer text-right">
             <span class="">
-              <i class="fas fa-square text-primary"></i> Profit
+              <i class="fas fa-square text-secondary"></i> Profit Penitipan &nbsp;
+              <i class="fas fa-square text-primary"></i> Profit Penjualan
             </span>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <!-- <div class="col-sm-6">
         <div class="card">
           <div class="card-header">
             <div class="d-flex justify-content-between">
@@ -106,7 +108,7 @@
             </div>
           </div>
           <div class="card-body">
-            <!-- <img src="<?= base_url('backend/assets/') . 'back.jpg'; ?>" class="img-fluid"> -->
+            <img src="<?= base_url('backend/assets/') . 'back.jpg'; ?>" class="img-fluid">
             <canvas id="myChart" height="300"></canvas>
           </div>
         </div>
@@ -120,11 +122,11 @@
             </div>
           </div>
           <div class="card-body">
-            <!-- <img src="<?= base_url('backend/assets/') . 'back.jpg'; ?>" class="img-fluid"> -->
+            <img src="<?= base_url('backend/assets/') . 'back.jpg'; ?>" class="img-fluid">
             <canvas id="myChart2" height="300"></canvas>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

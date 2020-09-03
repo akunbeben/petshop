@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Sep 2020 pada 13.23
+-- Waktu pembuatan: 03 Sep 2020 pada 14.28
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.33
 
@@ -43,7 +43,7 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `email`, `telepon`, `jabatan`, `start_date`, `status`) VALUES
-(1, 'Dwyne Johnson', 'Banjarmasin', 'example@mail.com', '080111111111', 1, '2020-02-03 02:43:57', 0),
+(1, 'Faisal', 'Banjarmasin', 'example@mail.com', '080111111111', 1, '2020-02-03 02:43:57', 0),
 (4, 'Mike Tyson', 'JALAN', 'akunbeben@gmail.com', '088888888', 2, '2020-02-04 23:23:13', 0);
 
 -- --------------------------------------------------------
@@ -329,16 +329,39 @@ CREATE TABLE `penitipan` (
   `catatan` text DEFAULT NULL,
   `tanggal_masuk` datetime NOT NULL,
   `status` int(11) NOT NULL,
-  `tanggal_keluar` datetime DEFAULT NULL
+  `tanggal_keluar` datetime DEFAULT NULL,
+  `biaya` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `penitipan`
 --
 
-INSERT INTO `penitipan` (`id`, `nama_peliharaan`, `pemilik`, `catatan`, `tanggal_masuk`, `status`, `tanggal_keluar`) VALUES
-(5, 'Kucing', 3, 'Sakit', '2020-02-04 23:19:56', 1, '2020-02-04 23:20:00'),
-(6, 'Tsar', 4, 'Sehat', '2020-02-15 20:14:44', 1, '2020-02-15 20:14:51');
+INSERT INTO `penitipan` (`id`, `nama_peliharaan`, `pemilik`, `catatan`, `tanggal_masuk`, `status`, `tanggal_keluar`, `biaya`) VALUES
+(10, 'Cat', 2, 'Nothing', '2020-09-01 14:49:31', 1, '2020-09-03 14:49:36', 25000),
+(11, 'Dog', 3, 'Nothing', '2020-09-02 14:50:15', 1, '2020-09-03 14:50:21', 30000),
+(12, 'Cat', 4, '-', '2020-09-03 14:53:26', 1, '2020-09-03 14:53:31', 25000),
+(13, 'Dog', 3, '-', '2020-09-03 14:53:43', 1, '2020-09-03 14:53:50', 25000),
+(14, 'Kucing', 4, '-', '2020-08-30 15:45:41', 1, '2020-09-03 15:48:43', 100000),
+(15, 'Singa', 4, '-', '2020-08-29 16:23:26', 1, '2020-09-03 16:24:42', 125000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `penitipan_biaya`
+--
+
+CREATE TABLE `penitipan_biaya` (
+  `id` int(11) NOT NULL,
+  `biaya` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `penitipan_biaya`
+--
+
+INSERT INTO `penitipan_biaya` (`id`, `biaya`) VALUES
+(1, 25000);
 
 -- --------------------------------------------------------
 
@@ -363,11 +386,12 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`faktur`, `kasir`, `pelanggan`, `total`, `profit`, `bayar`, `kembalian`, `waktu_transaksi`, `aktif`) VALUES
-('P0109200001', 'Dwyne Johnson', 'Umum', 80000, 40000, 100000, 20000, '2020-09-01 12:17:40', 0),
-('P0109200002', 'Dwyne Johnson', 'Umum', 200000, 100000, 200000, 0, '2020-09-01 12:18:11', 0),
+('P0109200001', 'Dwyne Johnson', 'Umum', 80000, 40000, 100000, 20000, '2020-08-29 12:17:40', 0),
+('P0109200002', 'Dwyne Johnson', 'Umum', 200000, 100000, 200000, 0, '2020-08-30 12:18:11', 0),
 ('P0109200003', 'Dwyne Johnson', 'Umum', 20000, 10000, 20000, 0, '2020-09-01 12:18:30', 0),
 ('P0209200004', 'Dwyne Johnson', 'Umum', 260000, 130000, 300000, 40000, '2020-09-02 12:55:10', 0),
-('P0209200005', 'Dwyne Johnson', 'Umum', 200000, 100000, 200000, 0, '2020-09-02 12:55:30', 0);
+('P0209200005', 'Dwyne Johnson', 'Umum', 200000, 100000, 200000, 0, '2020-09-02 12:55:30', 0),
+('P0309200006', 'Dwyne Johnson', 'Umum', 140000, 70000, 150000, 10000, '2020-09-03 12:44:49', 0);
 
 -- --------------------------------------------------------
 
@@ -391,7 +415,8 @@ INSERT INTO `penjualan_detail` (`id`, `faktur_id`, `produk`, `jumlah_terjual`) V
 (40, 'P0109200002', 4, 10),
 (41, 'P0109200003', 4, 1),
 (42, 'P0209200004', 3, 13),
-(43, 'P0209200005', 4, 10);
+(43, 'P0209200005', 4, 10),
+(44, 'P0309200006', 3, 7);
 
 -- --------------------------------------------------------
 
@@ -416,7 +441,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama_produk`, `stok`, `gambar`, `kategori`, `unit`, `harga_beli`, `harga_jual`, `profit`) VALUES
-(3, 'Wiskas', 87, 'default.png', 1, 2, 10000, 20000, 10000),
+(3, 'Wiskas', 80, 'default.png', 1, 2, 10000, 20000, 10000),
 (4, 'Kandang', 90, 'default.png', 2, 1, 10000, 20000, 10000);
 
 -- --------------------------------------------------------
@@ -572,6 +597,12 @@ ALTER TABLE `penitipan`
   ADD KEY `pemilik` (`pemilik`);
 
 --
+-- Indeks untuk tabel `penitipan_biaya`
+--
+ALTER TABLE `penitipan_biaya`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
@@ -633,13 +664,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT untuk tabel `keranjang_detail`
 --
 ALTER TABLE `keranjang_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan`
@@ -681,13 +712,19 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT untuk tabel `penitipan`
 --
 ALTER TABLE `penitipan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT untuk tabel `penitipan_biaya`
+--
+ALTER TABLE `penitipan_biaya`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`

@@ -31,6 +31,16 @@ class Admin extends CI_Controller
   {
     $data = $this->Report->getDataOmset();
 
+    // echo $this->db->last_query();
+
+    header('Content-Type: application/json');
+    echo json_encode(['status' => true, 'data' => $data]);
+  }
+
+  public function api_omset_penitipan()
+  {
+    $data = $this->Report->getDataOmsetPenitipan();
+
     header('Content-Type: application/json');
     echo json_encode(['status' => true, 'data' => $data]);
   }
@@ -38,6 +48,16 @@ class Admin extends CI_Controller
   public function api_profit()
   {
     $data = $this->Report->getDataProfit();
+
+    // echo $this->db->last_query();
+
+    header('Content-Type: application/json');
+    echo json_encode(['status' => true, 'data' => $data]);
+  }
+
+  public function api_profit_penitipan()
+  {
+    $data = $this->Report->getDataProfitPenitipan();
 
     header('Content-Type: application/json');
     echo json_encode(['status' => true, 'data' => $data]);

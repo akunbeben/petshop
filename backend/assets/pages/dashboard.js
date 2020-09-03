@@ -25,6 +25,9 @@ onAlreadyLoaded(function () {
 
 async function drawOmsetChart() {
   const dataset = await generateDataOmset(globalBaseUrl + "admin/api_omset");
+  const datasetPenitipan = await generateDataOmsetPenitipan(
+    globalBaseUrl + "admin/api_omset_penitipan"
+  );
 
   var ctx = document.getElementById("omsetChart").getContext("2d");
   var omsetChart = new Chart(ctx, {
@@ -38,6 +41,17 @@ async function drawOmsetChart() {
           borderColor: "#007bff",
           pointBorderColor: "#007bff",
           pointBackgroundColor: "#007bff",
+          fill: false,
+          // pointHoverBackgroundColor: "#007bff",
+          // pointHoverBorderColor: "#007bff",
+        },
+        {
+          type: "line",
+          data: datasetPenitipan.horizontalLabel,
+          backgroundColor: "transparent",
+          borderColor: "gray",
+          pointBorderColor: "gray",
+          pointBackgroundColor: "gray",
           fill: false,
           // pointHoverBackgroundColor: "#007bff",
           // pointHoverBorderColor: "#007bff",
@@ -102,6 +116,9 @@ async function drawOmsetChart() {
 
 async function drawProfitChart() {
   const dataset = await generateDataProfit(globalBaseUrl + "admin/api_profit");
+  const datasetPenitipan = await generateDataProfit(
+    globalBaseUrl + "admin/api_profit_penitipan"
+  );
 
   var ctx2 = document.getElementById("profitChart").getContext("2d");
   var profitChart = new Chart(ctx2, {
@@ -111,8 +128,13 @@ async function drawProfitChart() {
       datasets: [
         {
           backgroundColor: "#007bff",
-          borderColor: "#007bff",
+          borderColor: "white",
           data: dataset.horizontalLabel,
+        },
+        {
+          backgroundColor: "grey",
+          borderColor: "white",
+          data: datasetPenitipan.horizontalLabel,
         },
       ],
     },
@@ -123,7 +145,9 @@ async function drawProfitChart() {
         intersect: intersect,
         callbacks: {
           label: function (tooltipItem) {
-            return formatCurrency(tooltipItem.value) + " - " + dataset.extra;
+            return (
+              formatCurrency(tooltipItem.value) + " - " + tooltipItem.label
+            );
           },
         },
       },
@@ -175,21 +199,34 @@ async function drawProfitChart() {
 async function generateDataProfit(url) {
   const verticalLabel = [];
   const horizontalLabel = [];
-  const extra = [];
 
   let response = await fetch(url);
   let result = await response.json();
 
   for (let index in result.data) {
     horizontalLabel.push(result.data[index].profit);
-    verticalLabel.push(result.data[index].transaction_date);
-    extra.push(result.data[index].long_date);
+    verticalLabel.push(result.data[index].long_date);
   }
 
-  return { verticalLabel, horizontalLabel, extra };
+  return { verticalLabel, horizontalLabel };
 }
 
 async function generateDataOmset(url) {
+  const verticalLabel = [];
+  const horizontalLabel = [];
+
+  let response = await fetch(url);
+  let result = await response.json();
+
+  for (let index in result.data) {
+    verticalLabel.push(result.data[index].transaction_date);
+    horizontalLabel.push(result.data[index].omset);
+  }
+
+  return { verticalLabel, horizontalLabel };
+}
+
+async function generateDataOmsetPenitipan(url) {
   const verticalLabel = [];
   const horizontalLabel = [];
 
