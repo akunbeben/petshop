@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Sep 2020 pada 14.28
+-- Waktu pembuatan: 07 Sep 2020 pada 03.57
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.33
 
@@ -361,7 +361,7 @@ CREATE TABLE `penitipan_biaya` (
 --
 
 INSERT INTO `penitipan_biaya` (`id`, `biaya`) VALUES
-(1, 25000);
+(1, 30000);
 
 -- --------------------------------------------------------
 
@@ -391,7 +391,10 @@ INSERT INTO `penjualan` (`faktur`, `kasir`, `pelanggan`, `total`, `profit`, `bay
 ('P0109200003', 'Dwyne Johnson', 'Umum', 20000, 10000, 20000, 0, '2020-09-01 12:18:30', 0),
 ('P0209200004', 'Dwyne Johnson', 'Umum', 260000, 130000, 300000, 40000, '2020-09-02 12:55:10', 0),
 ('P0209200005', 'Dwyne Johnson', 'Umum', 200000, 100000, 200000, 0, '2020-09-02 12:55:30', 0),
-('P0309200006', 'Dwyne Johnson', 'Umum', 140000, 70000, 150000, 10000, '2020-09-03 12:44:49', 0);
+('P0309200006', 'Dwyne Johnson', 'Umum', 140000, 70000, 150000, 10000, '2020-09-03 12:44:49', 0),
+('P0509200007', 'Faisal', 'Umum', 40000, 20000, 50000, 10000, '2020-09-04 18:49:09', 0),
+('P0509200008', 'Faisal', 'Umum', 20000, 10000, 20000, 0, '2020-09-05 18:49:52', 0),
+('P0709200009', 'Faisal', 'Umum', 20000, 10000, 20000, 0, '2020-09-07 09:14:04', 0);
 
 -- --------------------------------------------------------
 
@@ -416,7 +419,10 @@ INSERT INTO `penjualan_detail` (`id`, `faktur_id`, `produk`, `jumlah_terjual`) V
 (41, 'P0109200003', 4, 1),
 (42, 'P0209200004', 3, 13),
 (43, 'P0209200005', 4, 10),
-(44, 'P0309200006', 3, 7);
+(44, 'P0309200006', 3, 7),
+(45, 'P0509200007', 3, 2),
+(46, 'P0509200008', 4, 1),
+(47, 'P0709200009', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -441,8 +447,8 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama_produk`, `stok`, `gambar`, `kategori`, `unit`, `harga_beli`, `harga_jual`, `profit`) VALUES
-(3, 'Wiskas', 80, 'default.png', 1, 2, 10000, 20000, 10000),
-(4, 'Kandang', 90, 'default.png', 2, 1, 10000, 20000, 10000);
+(3, 'Wiskas', 77, 'default.png', 1, 2, 10000, 20000, 10000),
+(4, 'Kandang', 89, 'default.png', 2, 1, 10000, 20000, 10000);
 
 -- --------------------------------------------------------
 
@@ -664,13 +670,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT untuk tabel `keranjang_detail`
 --
 ALTER TABLE `keranjang_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT untuk tabel `laporan`
@@ -724,7 +730,7 @@ ALTER TABLE `penitipan_biaya`
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT untuk tabel `produk`
